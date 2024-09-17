@@ -5,33 +5,33 @@ CCO,2022,2,CRSC04,Arquitetura de Computadores II,4,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
 CCO,2022,2,CTCO01,Algoritmos e Estruturas de Dados I,4,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
 CCO,2022,2,CMAC04,Modelagem Computacional,4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
 CCO,2013,2,CIC120,Organização e Arquitetura de Computadores I,4,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
-CCO,2013,2,CIC310,Economia da Informação,4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CCO,2013,2,CIC310,Economia da Informação,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 CCO,2013,4,CIC110,Análise e Projeto de Algoritmos I,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
-CCO,2013,4,COM120,Sistemas Operacionais,4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
-CCO,2013,4,COM210,Engenharia de Software I,4,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+CCO,2013,4,COM120,Sistemas Operacionais,5,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+CCO,2013,4,COM210,Engenharia de Software I,5,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
 CCO,2013,4,COM220,Computação Orientada a Objetos I,4,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
 CCO,2013,6,CIC133,Paradigmas de Programação,4,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
 CCO,2013,6,CIC220,Compiladores,4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
 CCO,2013,6,CIC260,Inteligência Artificial,4,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-CCO,2013,6,CIC270,Computação Gráfica,4,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+CCO,2013,6,CIC270,Computação Gráfica,3,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
 CCO,2013,6,COM231,Banco de Dados II,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
-CCO,2013,6,COM241,Adm. e Gerência de Redes de Computadores,4,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-CCO,2013,6,COM312,Informática e Sociedade,4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CCO,2013,6,COM241,Adm. e Gerência de Redes de Computadores,3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CCO,2013,6,COM312,Informática e Sociedade,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 
 SIN,2022,2,XDES02,Programação Orientada a Objetos,4,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
 SIN,2022,2,XDES04,Engenharia de Software I,4,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
 SIN,2022,2,STCO01,Algoritmos e Programação I,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
 SIN,2022,2,XMAC01,Matemática Discreta,4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
-SIN,2017,2,SIN411,Comportamento Organizacional,4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SIN,2017,2,SIN411,Comportamento Organizacional,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 SIN,2017,2,SIN120,Organização e Arquitetura de Computadores,4,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
 SIN,2017,4,COM221,Computação Orientada a Objetos II ,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
-SIN,2017,4,COM120,Sistemas Operacionais,4,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+SIN,2017,4,COM120,Sistemas Operacionais,5,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
 SIN,2017,4,COM211,Engenharia de Software II,4,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
 SIN,2017,4,COM230,Banco de Dados I,4,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
-SIN,2017,4,SIN110,Algoritmos e Grafos,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
-SIN,2017,6,COM312,Informática e Sociedade,4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SIN,2017,4,SIN110,Algoritmos e Grafos,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+SIN,2017,6,COM312,Informática e Sociedade,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 SIN,2017,6,COM212,Engenharia de Projeto de Software,4,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-SIN,2017,6,COM241,Adm. e Gerência de Redes de Computadores,4,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SIN,2017,6,COM241,Adm. e Gerência de Redes de Computadores,3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 SIN,2017,6,COM242,Sistemas Distribuídos,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
 SIN,2017,6,COM222,Desenvolvimento de Sistemas na Web,5,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
 
@@ -41,12 +41,12 @@ Outros Cursos,0,2,CCO016,Fundamentos de Programação (FBA),4,0,0,1,0,0,0,0,0,0,
 
 Optativas,0,4,COM922,Tópicos Especiais em Engenharia de Software (PEGA),4,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Optativas,0,4,COM937,Desenvolvimento de Jogos,4,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
-Optativas,0,6,ECOE44,Maratona de Programação I ,4,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
+Optativas,0,6,ECOE44,Maratona de Programação I ,3,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
 Optativas,0,6,OPT1,Tópicos Especiais em Programação (Programação Paralela),4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
 Optativas,0,4,OPT1,Data Mining Aplicado,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
 
 Pós Graduação,0,4,PCO118,Arquitetura de Software (Opt+Pós) ,4,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
 Pós Graduação,0,4,PCO114,Visualização de Informação (Opt+Pós),4,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
 Pós Graduação,0,6,PCO112,Simuladores (Pós),4,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-Pós Graduação,0,4,PCO003,Sistemas Operacionais (Pós) ,4,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+Pós Graduação,0,4,PCO003,Sistemas Operacionais (Pós) ,2,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Pós Graduação,0,6,PCO202,Tópicos em Engenharia de Software (Pós),4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
