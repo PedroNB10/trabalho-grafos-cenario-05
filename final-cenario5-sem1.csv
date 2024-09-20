@@ -17,7 +17,6 @@ CCO,2013,6,CIC270,Computação Gráfica,3,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
 CCO,2013,6,COM231,Banco de Dados II,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
 CCO,2013,6,COM241,Adm. e Gerência de Redes de Computadores,3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 CCO,2013,6,COM312,Informática e Sociedade,3,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-
 SIN,2022,2,XDES02,Programação Orientada a Objetos,4,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
 SIN,2022,2,XDES04,Engenharia de Software I,4,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
 SIN,2022,2,STCO01,Algoritmos e Programação I,4,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
@@ -34,17 +33,14 @@ SIN,2017,6,COM212,Engenharia de Projeto de Software,4,1,0,0,0,0,0,0,0,0,0,0,0,0,
 SIN,2017,6,COM241,Adm. e Gerência de Redes de Computadores,3,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 SIN,2017,6,COM242,Sistemas Distribuídos,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
 SIN,2017,6,COM222,Desenvolvimento de Sistemas na Web,5,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
-
 Outros Cursos,0,2,CCO016,Fundamentos de Programação (EPR/EHD),4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
 Outros Cursos,0,2,CCO016,Fundamentos de Programação (ECI/EAM),4,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
 Outros Cursos,0,2,CCO016,Fundamentos de Programação (FBA),4,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-
 Optativas,0,4,COM922,Tópicos Especiais em Engenharia de Software (PEGA),4,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 Optativas,0,4,COM937,Desenvolvimento de Jogos,4,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
 Optativas,0,6,ECOE44,Maratona de Programação I ,3,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0
 Optativas,0,6,OPT1,Tópicos Especiais em Programação (Programação Paralela),4,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
 Optativas,0,4,OPT1,Data Mining Aplicado,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
-
 Pós Graduação,0,4,PCO118,Arquitetura de Software (Opt+Pós) ,4,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0
 Pós Graduação,0,4,PCO114,Visualização de Informação (Opt+Pós),4,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
 Pós Graduação,0,6,PCO112,Simuladores (Pós),4,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
