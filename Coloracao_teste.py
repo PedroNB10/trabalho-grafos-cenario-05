@@ -42,8 +42,25 @@ def classifyDF(csv_path: str) -> list:
         return nodes
 
 def fazerArestas(nodes: list) -> list:
-    matrizAdj = []
+    matrizArestas = [[0] * len(nodes)] * len(nodes)
 
+    # criar arestas
+    for i in range(len(nodes)):
+        for j in range(i + 1, len(nodes), 1):
+
+            # professor
+            for p in nodes[i].professores:
+                if p in nodes[j].professores:
+                    matrizArestas[i][j] += 1
+                    matrizArestas[j][i] += 1
+            
+            # turmas
+            if nodes[i].turma == nodes[j].turma:
+                matrizArestas[i][j] += 1
+                matrizArestas[j][i] += 1
+
+
+    return matrizArestas
     
 
 
@@ -51,4 +68,6 @@ def fazerArestas(nodes: list) -> list:
 
 if __name__ == "__main__":
     nodes = classifyDF("cenario-5-semestre-2.csv")
+    arestas = fazerArestas(nodes)
 
+    print(arestas)
