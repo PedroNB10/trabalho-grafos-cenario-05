@@ -12,10 +12,8 @@ class Node():
 
         self.turma = curso + '-' + ppc + '.' + str(periodo)
         self.cor = None
+        self.horario = None
 
-    
-    def setCor(self, cor):
-        self.cor = cor
 
 def classifyDF(csv_path: str) -> list:
     # le os dados
@@ -45,31 +43,6 @@ def classifyDF(csv_path: str) -> list:
         
         return nodes
 
-def fazerArestas(nodes: list) -> list:
-    matrizArestas = [[0] * len(nodes)] * len(nodes)
-    #print(matrizArestas)
-
-    # criar arestas
-    for i in range(len(nodes)):
-        for j in range(i + 1, len(nodes), 1):
-
-            print(nodes[i].nome, nodes[j].nome)
-
-            # professor
-            for p in nodes[i].professores:
-                if p in nodes[j].professores:
-                    matrizArestas[i][j] += 1
-                    matrizArestas[j][i] += 1
-                    print("Professor igual")
-            
-            # turmas
-            if nodes[i].turma == nodes[j].turma:
-                matrizArestas[i][j] += 1
-                matrizArestas[j][i] += 1
-                print("Turma igual")
-
-
-    return matrizArestas
 
 def fazerListaAdj(nodes: list) -> dict:
 
@@ -139,6 +112,34 @@ def colorirGrafo(nodes: list, listaAdj: dict) -> int:
     return cores
 
 
+def fazerGrafoDasTurmas(nodes: list) -> dict:
+
+    listaAdj = {}
+
+    for i in range(len(nodes)):
+        arestas = set()
+
+        for j in range(len(nodes)):
+
+            if i == j:
+                continue
+
+            if nodes[i].turma == nodes[j].turma:
+                arestas.add(j)
+        
+        listaAdj[i] = arestas
+
+    
+    return listaAdj
+
+
+
+# def fazerDivisaoHorario(nodes: list, grafoColorido: dict, grafoTurmas: dict):
+    
+
+
+
+
 if __name__ == "__main__":
     nodes = classifyDF("cenario-5-semestre-2.csv")
     # arestas = fazerArestas(nodes)
@@ -147,21 +148,12 @@ if __name__ == "__main__":
     # print(arestas)
 
     print(colorirGrafo(nodes, arestas))
+
+    grafoPorTurmas = fazerGrafoDasTurmas(nodes)
+
+
+    # fazerDivisaoHorario(nodes, arestas, grafoPorTurmas)
+
     
-    for i in range(len(nodes)):
-        print(nodes[i].nome, nodes[i].cor)
-
-
-    # # for i in range(len(nodes)):
-    # #     print(nodes[i].nome, nodes[i].turma, nodes[i].professores)
-
-    # for i in range(len(nodes)):
-    #     for j in range(len(nodes)):
-    #         if arestas[i][j] > 1:
-    #             # print(nodes[i].nome, nodes[j].nome, arestas[i][j], "-->", nodes[i].ch, nodes[j].ch)
-    #             if nodes[i].nome == nodes[j].nome:
-    #                 print(nodes[i].nome, nodes[i].turma, 'AND', nodes[j].turma, '+', nodes[i].professores, 'VS', nodes[j].professores)
-
-    # for i in range(len(nodes)):
-    #     print(arestas[i][i])
+  
 
