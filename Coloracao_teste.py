@@ -37,8 +37,18 @@ def classifyDF(csv_path: str) -> list:
             # nodes.append(Node(row[0], row[1], row[2], row[3], row[4], row[5], professores))
 
             # Pra cada ch, coloca uma cópia da disciplina
-            for cloneNum in range(int(row[5])):
-                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], row[5], professores))
+            # for cloneNum in range(int(row[5])):
+            #     nodes.append(Node(row[0], row[1], row[2], row[3], row[4], row[5], professores))
+
+            # dessa forma, as disciplinas são divididas em porções de tamanho 2 ou 3 para colocar na tabela de horários
+            if row[5] == '5':
+                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], 3, professores))
+                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], 2, professores))
+            elif row[5] == '4':
+                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], 2, professores))
+                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], 2, professores))
+            else:
+                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], int(row[5]), professores))
 
         
         return nodes
