@@ -15,6 +15,11 @@ class Node():
         self.horario = None
 
 
+def logicalXOR(a, b, condition):
+    # return (a and not b) or (not a and b)
+    return ((a == condition and b != condition) or (a != condition and b == condition))
+
+
 def classificarDf(caminhoCsv: str) -> list:
     # Lê os dados do CSV
     with open(caminhoCsv, encoding="utf-8") as arquivo:
@@ -62,6 +67,15 @@ def criarListaAdjacencia(nos: list) -> dict:
         for j in range(0, len(nos)):
 
             if i == j:
+                continue
+
+            # nao há porque permitir que nos com cargas horarias diferentes se conectem, ja que vao ser colocados em blocos diferentes de qualquer forma
+            if nos[i].ch != nos[j].ch:
+                continue
+
+            # se um dos cursos for sistemas e o outro nao for, nao precisa fazer as conexoes, ja que um é a noite e o outro nao
+            if logicalXOR(nos[i].curso, nos[j].curso, 'SIN'):
+                #print(nos[i].curso, nos[j].curso)
                 continue
             
             if nos[i].turma == nos[j].turma:
@@ -136,9 +150,93 @@ def criarGrafoTurmas(nos: list) -> dict:
     return grafoTurmas 
 
 
-# def fazerDivisaoHorario(nos: list, grafoColorido: dict, grafoTurmas: dict):
-# Função para dividir os horários (ainda não implementada)
+def fazerDivisaoHorario(nos: list):
+    # Primeiro passo: Criar os horarios
+    horarios = [{}, {}, {}, {}, {}]
+    for i in range(5):
+        horarios[i] = {'M123': None, 'M45': None, 'T12': None, 'T345': None, 'N12': None, 'N345': None}
+    
+    # se separar uma cor para cada horario, podemos simplesmente conectar as disciplinas a suas respectivas cores
+    for i in range(len(nos)):
 
+        sucesso = False
+
+        # curso de sistemas sempre é à noite
+        if nos[i].curso == 'SIN':
+
+            for dia in range(5):
+                
+                if nos[i].ch == 3:
+                    if horarios[dia]['N345'] == None or horarios[dia]['N345'] == nos[i].cor:
+                        horarios[dia]['N345'] = nos[i].cor
+                        sucesso = True
+                
+                else:
+                    if horarios[dia]['N12'] == None or horarios[dia]['N12'] == nos[i].cor:
+                        horarios[dia]['N12'] = nos[i].cor
+                        sucesso = True
+                
+                if sucesso:
+                    break
+            
+            # se nao tiver tido sucesso ainda, teremos que pegar um horario de 3 para uma disciplina de 2
+            if not sucesso:
+
+                for dia in range(5):
+                    if horarios[dia]['N345'] == None or horarios[dia]['N345'] == nos[i].cor:
+                        horarios[dia]['N345'] = nos[i].cor
+                        sucesso = True
+                
+                    if sucesso:
+                        break
+                    
+        
+        # outros cursos conseguem horarios de dia ou de tarde
+        else:
+            for dia in range(5):
+                
+                if nos[i].ch == 3:
+                    if horarios[dia]['T345'] == None or horarios[dia]['T345'] == nos[i].cor:
+                        horarios[dia]['T345'] = nos[i].cor
+                        sucesso = True
+
+                    elif horarios[dia]['M123'] == None or horarios[dia]['M123'] == nos[i].cor:
+                        horarios[dia]['M123'] = nos[i].cor
+                        sucesso = True
+
+                else:
+                    if horarios[dia]['T12'] == None or horarios[dia]['T12'] == nos[i].cor:
+                        horarios[dia]['T12'] = nos[i].cor
+                        sucesso = True
+
+                    elif horarios[dia]['M45'] == None or horarios[dia]['M45'] == nos[i].cor:
+                        horarios[dia]['M45'] = nos[i].cor
+                        sucesso = True
+
+                if sucesso:
+                    break
+
+            # se nao tiver tido sucesso ainda, teremos que pegar um horario de 3 para uma disciplina de 2
+            if not sucesso:
+
+                for dia in range(5):
+                    if horarios[dia]['T345'] == None or horarios[dia]['T345'] == nos[i].cor:
+                        horarios[dia]['T345'] = nos[i].cor
+                        sucesso = True
+
+                    elif horarios[dia]['M123'] == None or horarios[dia]['M123'] == nos[i].cor:
+                        horarios[dia]['M123'] = nos[i].cor
+                        sucesso = True
+                
+                    if sucesso:
+                        break
+        
+        # debug pra quando uma dissciplina não tiver horario disponivel
+        if not sucesso:
+            print('Horario nao adicionado : ' + nos[i].nome, nos[i].curso, nos[i].cor, nos[i].ch)
+        
+    return horarios
+                
 
 if __name__ == "__main__":
     nos = classificarDf("..\\datasets\\csv\\semestre2.csv")
@@ -149,10 +247,11 @@ if __name__ == "__main__":
 
     print(colorirGrafo(nos, arestas))
 
-    grafoPorTurmas = criarGrafoTurmas(nos)
+    # grafoPorTurmas = criarGrafoTurmas(nos)
 
-    # fazerDivisaoHorario(nos, arestas, grafoPorTurmas)
+    horarios = fazerDivisaoHorario(nos)
 
-    
-  
+    print(horarios)
+
+
 
