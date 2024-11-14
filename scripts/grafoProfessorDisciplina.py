@@ -1,11 +1,9 @@
-# Código desenvolvido em grupo na disciplina de Grafos
-
 import os
 import networkx as nx
 import matplotlib.pyplot as plt
 
 # Criar o grafo bipartido
-G = nx.Graph()
+grafo = nx.Graph()
 
 # Conjunto A: Disciplinas com vértices únicos e a carga horária como atributo
 disciplinas_info = {
@@ -56,8 +54,8 @@ disciplinas_info = {
 }
 
 # Adicionar vértices para disciplinas com a carga horária como atributo
-for disciplina, ch in disciplinas_info.items():
-    G.add_node(disciplina, bipartite=0, ch=ch)
+for disciplina, carga_horaria in disciplinas_info.items():
+    grafo.add_node(disciplina, bipartite=0, carga_horaria=carga_horaria)
 
 # Conjunto B: Professores
 professores = ['Prof1', 'Prof2', 'Prof3', 'Prof4', 'Prof5', 
@@ -70,7 +68,7 @@ professores = ['Prof1', 'Prof2', 'Prof3', 'Prof4', 'Prof5',
 
 # Adicionar vértices para os professores
 for professor in professores:
-    G.add_node(professor, bipartite=1)
+    grafo.add_node(professor, bipartite=1)
 
 # Arestas conectando disciplinas a professores (disponibilidade)
 arestas = [
@@ -120,51 +118,48 @@ arestas = [
     #('Tópicos em Engenharia de Software (Pós)', 'Prof17')
 ]
 
-
 # Adicionar as arestas ao grafo
 for aresta in arestas:
-     if isinstance(aresta[1], list):
-         for professor in aresta[1]:
-             G.add_edge(aresta[0], professor)
-     else:
-         G.add_edge(aresta[0], aresta[1])
-
-plt.figure(figsize=(20, 14))  # Largura, altura
+    if isinstance(aresta[1], list):
+        for professor in aresta[1]:
+            grafo.add_edge(aresta[0], professor)
+    else:
+        grafo.add_edge(aresta[0], aresta[1])
 
 # Definir o layout bipartido para visualização
 pos = {}
-# Aumentar ainda mais o espaçamento entre as disciplinas
-discipline_spacing = 5  # Aumentar o espaçamento entre disciplinas
-pos.update((n, (0, i * discipline_spacing)) for i, n in enumerate(disciplinas_info))
+# Aumentar o espaçamento entre as disciplinas
+espaco_disciplinas = 5  # Aumentar o espaçamento entre disciplinas
+pos.update((n, (0, i * espaco_disciplinas)) for i, n in enumerate(disciplinas_info))
 
 # Manter o espaçamento grande para os professores
-professor_spacing = 8  # Ajustando um pouco mais o espaçamento vertical dos professores
-pos.update((professor, (1, i * professor_spacing)) for i, professor in enumerate(professores))
+espaco_professores = 8  # Ajustando o espaçamento vertical dos professores
+pos.update((professor, (1, i * espaco_professores)) for i, professor in enumerate(professores))
 
 # Desenhar os nós das disciplinas e professores
-disciplinas = [n for n in G.nodes if G.nodes[n].get('bipartite') == 0]
-professores = [n for n in G.nodes if G.nodes[n].get('bipartite') == 1]
+disciplinas = [n for n in grafo.nodes if grafo.nodes[n].get('bipartite') == 0]
+professores = [n for n in grafo.nodes if grafo.nodes[n].get('bipartite') == 1]
 
 # Desenhar nós
-nx.draw_networkx_nodes(G, pos, nodelist=disciplinas, node_color='skyblue', node_size=1000)
-nx.draw_networkx_nodes(G, pos, nodelist=professores, node_color='orange', node_size=1000)
+nx.draw_networkx_nodes(grafo, pos, nodelist=disciplinas, node_color='skyblue', node_size=1000)
+nx.draw_networkx_nodes(grafo, pos, nodelist=professores, node_color='orange', node_size=1000)
 
 # Definir cores das arestas com base na carga horária das disciplinas
-edge_colors = []
-for u, v in G.edges():
-     carga_horaria = G.nodes[u].get('ch')
-     if carga_horaria >= 4:
-         edge_colors.append('blue') # Azul para carga horária >= 4
-     else:
-         edge_colors.append('red') # Vermelho para carga horária < 4
+cores_arestas = []
+for u, v in grafo.edges():
+    carga_horaria = grafo.nodes[u].get('carga_horaria')
+    if carga_horaria >= 4:
+        cores_arestas.append('blue')  # Azul para carga horária >= 4
+    else:
+        cores_arestas.append('red')   # Vermelho para carga horária < 4
 
 # Desenhar as arestas com as cores definidas
-nx.draw_networkx_edges(G, pos, edgelist=G.edges(), width=1, edge_color=edge_colors)
+nx.draw_networkx_edges(grafo, pos, edgelist=grafo.edges(), width=1, edge_color=cores_arestas)
 
 # Adicionar rótulos para os nós (Disciplinas e Professores)
-nx.draw_networkx_labels(G, pos, font_size=8)
+nx.draw_networkx_labels(grafo, pos, font_size=8)
 
 # Exibir o grafo
 plt.title("Grafo Bipartido: Disciplinas e Professores com Carga Horária")
-plt.savefig(fr"C:\Users\omath\OneDrive\Área de Trabalho\Frinhani\grafo_professor_disciplina.png", format="png", bbox_inches="tight")
+plt.savefig("../imagens/grafoProfessorDisciplina.png", format="png", bbox_inches="tight")
 plt.show()

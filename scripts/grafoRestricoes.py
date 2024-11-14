@@ -1,8 +1,9 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import os
 
 # Criar um grafo de restrições
-G_restricoes = nx.Graph()
+grafoRestricoes = nx.Graph()
 
 # Adicionar disciplinas como vértices
 disciplinas = [
@@ -56,12 +57,9 @@ disciplinas = [
     'Tópicos em Engenharia de Software (Pós)'
 ]
 
-#G_restricoes.add_nodes_from(disciplinas)
-
-
 # Definindo os dados de exemplo
 # Padrão ==> (Nome, Curso, Periodo, Professor)
-dados_disciplinas = [
+dadosDisciplinas = [
     ('Fundamentos de Programação', 'CCO', '2', 'Prof 12'),
     ('Programação Lógica e Funcional', 'CCO', '2', 'Prof 7'),
     ('Arquitetura de Computadores II', 'CCO', '2', 'Prof 10'),
@@ -86,7 +84,7 @@ dados_disciplinas = [
     ('Matemática Discreta', 'SIN', '2', 'Prof 5'),
     ('Comportamento Organizacional', 'SIN', '2', 'Prof 2'),
     ('Organização e Arquitetura de Computadores', 'SIN', '2', 'Prof 11'),
-    ('Computação Orientada a Objetos II ', 'SIN', '4', 'Prof 15'),
+    ('Computação Orientada a Objetos II', 'SIN', '4', 'Prof 15'),
     ('Sistemas Operacionais', 'SIN', '4', 'Prof 13'),
     ('Engenharia de Software II', 'SIN', '4', 'Prof 10'),
     ('Banco de Dados I', 'SIN', '4', 'Prof 12'),
@@ -96,49 +94,59 @@ dados_disciplinas = [
     ('Adm. e Gerência de Redes de Computadores', 'SIN', '6', 'Prof 4'),
     ('Sistemas Distribuídos', 'SIN', '6', 'Prof 16'),
     ('Desenvolvimento de Sistemas na Web', 'SIN', '6', 'Prof 9'),
-    ('Fundamentos de Programação (EPR/EHD),', 'Outros Cursos', '2', 'Prof 15'),
-    ('Fundamentos de Programação (ECI/EAM),', 'Outros Cursos', '2', 'Prof 8'),
-    ('Fundamentos de Programação (FBA),', 'Outros Cursos', '2', 'Prof 3'),
-    ('Tópicos Especiais em Engenharia de Software (PEGA),', 'Optativas', '4', 'Prof 4'),
+    ('Fundamentos de Programação (EPR/EHD)', 'Outros Cursos', '2', 'Prof 15'),
+    ('Fundamentos de Programação (ECI/EAM)', 'Outros Cursos', '2', 'Prof 8'),
+    ('Fundamentos de Programação (FBA)', 'Outros Cursos', '2', 'Prof 3'),
+    ('Tópicos Especiais em Engenharia de Software (PEGA)', 'Optativas', '4', 'Prof 4'),
     ('Desenvolvimento de Jogos', 'Optativas', '4', 'Prof 6'),
-    ('Maratona de Programação I ', 'Optativas', '6', 'Prof 11'),
-    ('Tópicos Especiais em Programação (Programação Paralela),', 'Optativas', '6', 'Prof 5'),
+    ('Maratona de Programação I', 'Optativas', '6', 'Prof 11'),
+    ('Tópicos Especiais em Programação (Programação Paralela)', 'Optativas', '6', 'Prof 5'),
     ('Data Mining Aplicado', 'Optativas', '4', 'Prof 18'),
-    ('Arquitetura de Software (Opt+Pós), ', 'Pós Graduação', '4', 'Prof 10'),
-    ('Visualização de Informação (Opt+Pós),', 'Pós Graduação', '4', 'Prof 12'),
-    ('Simuladores (Pós),', 'Pós Graduação', '6', 'Prof 3'),
-    ('Sistemas Operacionais (Pós), ', 'Pós Graduação', '4', 'Prof 4'),
-    ('Tópicos em Engenharia de Software (Pós),', 'Pós Graduação', '6', 'Prof 17'),
+    ('Arquitetura de Software (Opt+Pós)', 'Pós Graduação', '4', 'Prof 10'),
+    ('Visualização de Informação (Opt+Pós)', 'Pós Graduação', '4', 'Prof 12'),
+    ('Simuladores (Pós)', 'Pós Graduação', '6', 'Prof 3'),
+    ('Sistemas Operacionais (Pós)', 'Pós Graduação', '4', 'Prof 4'),
+    ('Tópicos em Engenharia de Software (Pós)', 'Pós Graduação', '6', 'Prof 17'),
 ]
 
-
-# Adicionando nodes:
+# Adicionando nós
 for i in range(len(disciplinas)):
-    if dados_disciplinas[i][1] == "SIN":
-        G_restricoes.add_node(disciplinas[i])
-
-
+    if dadosDisciplinas[i][1] == "SIN":
+        grafoRestricoes.add_node(disciplinas[i])
 
 # Adicionar arestas para restrições
-for i in range(len(dados_disciplinas)):
-    for j in range(i + 1, len(dados_disciplinas)):
+for i in range(len(dadosDisciplinas)):
+    for j in range(i + 1, len(dadosDisciplinas)):
 
-        # Travando pra um curso só
-        if (dados_disciplinas[i][1] != "SIN"):
+        # Travando para um curso só
+        if (dadosDisciplinas[i][1] != "SIN"):
             break
-        if (dados_disciplinas[j][1] != "SIN"):
+        if (dadosDisciplinas[j][1] != "SIN"):
             continue
 
         # Verificando mesmo curso e mesmo período
-        if (dados_disciplinas[i][1] == dados_disciplinas[j][1] and 
-            dados_disciplinas[i][2] == dados_disciplinas[j][2]):
-            G_restricoes.add_edge(dados_disciplinas[i][0], dados_disciplinas[j][0])
+        if (dadosDisciplinas[i][1] == dadosDisciplinas[j][1] and 
+            dadosDisciplinas[i][2] == dadosDisciplinas[j][2]):
+            grafoRestricoes.add_edge(dadosDisciplinas[i][0], dadosDisciplinas[j][0])
         
         # Verificando mesmo professor
-        if set(dados_disciplinas[i][3]) & set(dados_disciplinas[j][3]):  # Interseção dos professores
-            G_restricoes.add_edge(dados_disciplinas[i][0], dados_disciplinas[j][0])
+        if set(dadosDisciplinas[i][3]) & set(dadosDisciplinas[j][3]):  # Interseção dos professores
+            grafoRestricoes.add_edge(dadosDisciplinas[i][0], dadosDisciplinas[j][0])
 
-# Visualizar o grafo de restrições
-nx.draw(G_restricoes, with_labels=True, node_color='lightcoral', font_size=10)
-plt.title("Grafo de Restrições entre Disciplinas")
-plt.show()
+# Desenhando o grafo
+plt.figure(figsize=(10, 10))
+nx.draw(grafoRestricoes, with_labels=True, font_weight='bold', node_size=3000, node_color='lightblue', font_size=10)
+
+# Caminho do diretório raiz
+diretorioRaiz = os.path.dirname(os.path.abspath(__file__))  # Caminho do script atual
+diretorioImagens = os.path.join(diretorioRaiz, '..', 'imagens')  # Caminho para a pasta 'imagens'
+
+# Verificar se a pasta 'imagens' existe, e se não, criar
+if not os.path.exists(diretorioImagens):
+    os.makedirs(diretorioImagens)
+
+# Caminho completo para salvar a imagem
+caminhoImagem = os.path.join(diretorioImagens, 'grafoRestricoes.png')
+
+# Salvar a imagem
+plt.savefig(caminhoImagem, format="png", bbox_inches="tight")

@@ -1,54 +1,53 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+import os
 
+def csvParaImagemTabelaUnica(caminhoCsv, caminhoImagem):
+    # Lê o arquivo CSV
+    df = pd.read_csv(caminhoCsv)
 
-def csv_to_single_table_image(csv_path, image_path):
-    # Read the CSV file
-    df = pd.read_csv(csv_path)
-
-    # Set up the matplotlib figure
+    # Configura a figura do matplotlib
     fig, ax = plt.subplots(
         figsize=(15, len(df) * 0.5)
-    )  # Adjust the size for visibility
-    ax.axis("off")  # Hide axes
+    )  # Ajusta o tamanho para melhor visualização
+    ax.axis("off")  # Oculta os eixos
 
-    # Create the table
-    table = ax.table(
+    # Cria a tabela
+    tabela = ax.table(
         cellText=df.values, colLabels=df.columns, cellLoc="center", loc="center"
     )
 
-    # Adjust the table's properties for better fit
-    table.auto_set_font_size(False)
-    table.set_fontsize(15)  # Adjust font size as needed
-    table.scale(1.2, 1.2)  # Adjust scale to make the table fit in the image
+    # Ajusta as propriedades da tabela para melhor adaptação
+    tabela.auto_set_font_size(False)
+    tabela.set_fontsize(15)  # Ajusta o tamanho da fonte conforme necessário
+    tabela.scale(1.2, 1.2)  # Ajusta a escala para fazer a tabela caber na imagem
 
-    # Adjust column widths to fit content
-    for key, cell in table.get_celld().items():
+    # Ajusta a largura das colunas para caber o conteúdo
+    for chave, celula in tabela.get_celld().items():
+        indiceLinha, indiceColuna = chave  # Extrai os índices de linha e coluna
 
-        row_idx, col_idx = key  # Extract row and column indices
-
-        if col_idx == 0:
-            cell.set_width(0.16)
-        elif col_idx == 1:
-            cell.set_width(0.08)
-        elif col_idx == 2:
-            cell.set_width(0.25)
-        elif col_idx == 3:
-            cell.set_width(0.25)
-        elif col_idx == 4:
-            cell.set_width(0.55)
-        elif col_idx == 5:
-            cell.set_width(0.06)
-
-        elif col_idx > 5:
-            cell.set_width(0.08)
+        if indiceColuna == 0:
+            celula.set_width(0.16)
+        elif indiceColuna == 1:
+            celula.set_width(0.08)
+        elif indiceColuna == 2:
+            celula.set_width(0.25)
+        elif indiceColuna == 3:
+            celula.set_width(0.25)
+        elif indiceColuna == 4:
+            celula.set_width(0.55)
+        elif indiceColuna == 5:
+            celula.set_width(0.06)
+        elif indiceColuna > 5:
+            celula.set_width(0.08)
         else:
-            cell.set_width(0.25)  # Set a fixed width for all cells
-        cell.set_height(0.04)  # Set a fixed height for all cells
+            celula.set_width(0.25)  # Define uma largura fixa para todas as células
 
-    # Save the table as an image
-    plt.savefig(image_path, bbox_inches="tight", dpi=400, format="pdf")
+        celula.set_height(0.04)  # Define uma altura fixa para todas as células
 
+    # Salva a tabela como uma imagem
+    plt.savefig(caminhoImagem, bbox_inches="tight", dpi=400, format="pdf")
 
-# Example usage:
-csv_to_single_table_image("final-cenario5-sem1.csv", "tabela_completa.pdf")
+# Exemplo de uso:
+caminhoPdf = os.path.join("..", "datasets", "tabelaCompleta.pdf")
+csvParaImagemTabelaUnica("../datasets/csv/semestre1.csv", caminhoPdf)
