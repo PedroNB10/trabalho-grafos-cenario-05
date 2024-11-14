@@ -1,8 +1,8 @@
 import csv
 
 class Node():
-    def __init__(self, curso, ppc, periodo, cod, nome, ch, professores: list):
-        self.cod = cod
+    def __init__(self, curso, ppc, periodo, codigo, nome, ch, professores: list):
+        self.codigo = codigo
         self.nome = nome
         self.curso = curso
         self.ppc = ppc
@@ -15,154 +15,143 @@ class Node():
         self.horario = None
 
 
-def classifyDF(csv_path: str) -> list:
-    # le os dados
-    with open(csv_path, encoding="utf-8") as file:
-        df = csv.reader(file)
+def classificarDf(caminhoCsv: str) -> list:
+    # Lê os dados do CSV
+    with open(caminhoCsv, encoding="utf-8") as arquivo:
+        df = csv.reader(arquivo)
 
-        # pula o cabecalho
+        # Pula o cabeçalho
         next(df)
 
-        nodes = []
+        nos = []
 
-        for row in df:
-            
-            # adiciona os professores em uma lista para colocar nos nodes
+        for linha in df:
+            # Adiciona os professores em uma lista para colocar nos nós
             professores = []
-            for i in range(6, len(row), 1):
-                if row[i] == '1':
+            for i in range(6, len(linha), 1):
+                if linha[i] == '1':
                     professores.append(i-5)
             
             # coloca as disciplinas no modelo Node
-            # nodes.append(Node(row[0], row[1], row[2], row[3], row[4], row[5], professores))
+            # nos.append(Node(linha[0], linha[1], linha[2], linha[3], linha[4], linha[5], professores))
 
-            # Pra cada ch, coloca uma cópia da disciplina
-            # for cloneNum in range(int(row[5])):
-            #     nodes.append(Node(row[0], row[1], row[2], row[3], row[4], row[5], professores))
-
-            # dessa forma, as disciplinas são divididas em porções de tamanho 2 ou 3 para colocar na tabela de horários
-            if row[5] == '5':
-                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], 3, professores))
-                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], 2, professores))
-            elif row[5] == '4':
-                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], 2, professores))
-                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], 2, professores))
+            # Pra cada CH, coloca uma cópia da disciplina
+            # for cloneNum in range(int(linha[5])):
+            #     nos.append(Node(linha[0], linha[1], linha[2], linha[3], linha[4], linha[5], professores))
+            
+            # Divide as disciplinas conforme necessário para a tabela de horários
+            if linha[5] == '5':
+                nos.append(Node(linha[0], linha[1], linha[2], linha[3], linha[4], 3, professores))
+                nos.append(Node(linha[0], linha[1], linha[2], linha[3], linha[4], 2, professores))
+            elif linha[5] == '4':
+                nos.append(Node(linha[0], linha[1], linha[2], linha[3], linha[4], 2, professores))
+                nos.append(Node(linha[0], linha[1], linha[2], linha[3], linha[4], 2, professores))
             else:
-                nodes.append(Node(row[0], row[1], row[2], row[3], row[4], int(row[5]), professores))
+                nos.append(Node(linha[0], linha[1], linha[2], linha[3], linha[4], int(linha[5]), professores))
 
-        
-        return nodes
+        return nos
 
 
-def fazerListaAdj(nodes: list) -> dict:
+def criarListaAdjacencia(nos: list) -> dict:
+    listaAdjacencia = {}
 
-    listaAdj = {}
-
-    for i in range(len(nodes)):
+    for i in range(len(nos)):
 
         arestas = set()
 
-        for j in range(0, len(nodes)):
+        for j in range(0, len(nos)):
 
             if i == j:
                 continue
             
-
-            if nodes[i].turma == nodes[j].turma:
+            if nos[i].turma == nos[j].turma:
                 arestas.add(j)
 
-            for p in nodes[i].professores:
-                if p in nodes[j].professores:
+            for p in nos[i].professores:
+                if p in nos[j].professores:
                     arestas.add(j)
 
+        listaAdjacencia[i] = arestas
 
-        listaAdj[i] = arestas
-
-    
-    return listaAdj
+    return listaAdjacencia
 
 
 
-def colorirGrafo(nodes: list, listaAdj: dict) -> int:
-    # numero de cores ate agora registradas
+def colorirGrafo(nos: list, listaAdjacencia: dict) -> int:
+    # Número de cores usadas até agora
     cores = 0
 
-    # Pra cada node, vamos tentar colori-lo
-    for i in range(len(nodes)):
+    # Para cada nó, vamos tentar colori-lo
+    for i in range(len(nos)):
 
-        # listaCores representa as  cores que não podem ser usadas
-        listaCores = []
+        # Lista de cores que não podem ser usadas
+        coresBloqueadas = []
 
-        # Pra cada aresta encontrada, vamos adicionar sua cor na lista de cores bloqueadas
-        for aresta in listaAdj[i]:
+        # Para cada aresta, adiciona sua cor à lista de cores bloqueadas
+        for aresta in listaAdjacencia[i]:
             
-            if nodes[aresta].cor != None:
+            if nos[aresta].cor != None:
 
-                listaCores.append(nodes[aresta].cor)
+                coresBloqueadas.append(nos[aresta].cor)
 
-        # agora colocamos a cor Final como -1 para fazer um teste
+        # Inicializa corFinal como -1 para buscar uma cor disponível
         corFinal = -1
 
-        # começando da primeira cor criada, vamos procurar uma cor que não seja bloqueada
+        # Procura uma cor que não esteja na lista de cores bloqueadas
         for cor in range(cores):
 
-            if cor not in listaCores:
+            if cor not in coresBloqueadas:
 
                 corFinal = cor
                 break
 
-        # se nao achamos uma cor utilizavel, criamos uma nova cor
+        # Se nenhuma cor disponível foi encontrada, cria uma nova cor
         if corFinal == -1:
             corFinal = cores
             cores += 1
         
-        # por ultimo, pintamos o vertice
-        nodes[i].cor = corFinal
+        # Atribui a cor ao nó
+        nos[i].cor = corFinal
 
     return cores
 
 
-def fazerGrafoDasTurmas(nodes: list) -> dict:
+def criarGrafoTurmas(nos: list) -> dict:
 
-    listaAdj = {}
+    grafoTurmas = {}
 
-    for i in range(len(nodes)):
+    for i in range(len(nos)):
         arestas = set()
 
-        for j in range(len(nodes)):
+        for j in range(len(nos)):
 
             if i == j:
                 continue
 
-            if nodes[i].turma == nodes[j].turma:
+            if nos[i].turma == nos[j].turma:
                 arestas.add(j)
         
-        listaAdj[i] = arestas
+        grafoTurmas [i] = arestas
 
-    
-    return listaAdj
-
+    return grafoTurmas 
 
 
-# def fazerDivisaoHorario(nodes: list, grafoColorido: dict, grafoTurmas: dict):
-    
-
-
+# def fazerDivisaoHorario(nos: list, grafoColorido: dict, grafoTurmas: dict):
+# Função para dividir os horários (ainda não implementada)
 
 
 if __name__ == "__main__":
-    nodes = classifyDF("cenario-5-semestre-2.csv")
-    # arestas = fazerArestas(nodes)
-    arestas = fazerListaAdj(nodes)
+    nos = classificarDf("..\\datasets\\csv\\semestre2.csv")
+    # arestas = fazerArestas(nos)
+    arestas = criarListaAdjacencia(nos)
 
     # print(arestas)
 
-    print(colorirGrafo(nodes, arestas))
+    print(colorirGrafo(nos, arestas))
 
-    grafoPorTurmas = fazerGrafoDasTurmas(nodes)
+    grafoPorTurmas = criarGrafoTurmas(nos)
 
-
-    # fazerDivisaoHorario(nodes, arestas, grafoPorTurmas)
+    # fazerDivisaoHorario(nos, arestas, grafoPorTurmas)
 
     
   
