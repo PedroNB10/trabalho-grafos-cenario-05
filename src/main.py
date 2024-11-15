@@ -9,14 +9,17 @@ def logicalXOR(a, b, condition):
     return ((a == condition and b != condition) or (a != condition and b == condition))
 
 
-def classificarDf(caminhoCsv: str) -> list:
+def carregarDisciplinasCsv(caminhoCsv: str) -> list[Disciplina]:
     # Obtém o caminho absoluto do arquivo CSV
     caminho_absoluto = os.path.abspath(caminhoCsv)
 
     # Lê os dados do CSV
     with open(caminho_absoluto, encoding="utf-8") as arquivo:
-        df = csv.reader(arquivo)
 
+        df = csv.reader(arquivo)
+        # Lê o cabeçalho para obter a quantidade de colunas
+        TOTAL_COLUNAS_CABECALHO = len(next(df))
+        
         # Pula o cabeçalho
         next(df)
 
@@ -24,29 +27,34 @@ def classificarDf(caminhoCsv: str) -> list:
 
         for linha in df:
             professores = []
-            for i in range(6, len(linha), 1):
-                if linha[i] == '1':
+            for i in range(6, TOTAL_COLUNAS_CABECALHO, 1): # a partir do 6 tem o Prof 1
+                if linha[i] == '1': # significa que o professor ministra a disciplina
                     professores.append(i - 5)
+        
+            curso = linha[0]
+            ppc = linha[1]
+            periodo = linha[2]
+            codigo_disciplina = linha[3]
+            nome_disciplina = linha[4]
+            ch = int(linha[5])
 
-            index = 0
-            if linha[5] == '5':
-                nos.append(Disciplina(index, linha[0], linha[1], linha[2], linha[3], linha[4], 3, professores))
-                nos.append(Disciplina(index + 1, linha[0], linha[1], linha[2], linha[3], linha[4], 2, professores))
-                index += 2
-            elif linha[5] == '4':
-                nos.append(Disciplina(index, linha[0], linha[1], linha[2], linha[3], linha[4], 2, professores))
-                nos.append(Disciplina(index + 1, linha[0], linha[1], linha[2], linha[3], linha[4], 2, professores))
-                index += 2
+            indice = 0
+            if ch == 5:
+                nos.append(Disciplina(indice, curso, ppc, periodo, codigo_disciplina, nome_disciplina, 3, professores))
+                nos.append(Disciplina(indice + 1, curso, ppc, periodo, codigo_disciplina, nome_disciplina, 2, professores))
+                indice += 2
+            elif ch == 4:
+                nos.append(Disciplina(indice, curso, ppc, periodo, codigo_disciplina, nome_disciplina, 2, professores))
+                nos.append(Disciplina(indice + 1, curso, ppc, periodo, codigo_disciplina, nome_disciplina, 2, professores))
+                indice += 2
             else:
-                nos.append(Disciplina(index, linha[0], linha[1], linha[2], linha[3], linha[4], int(linha[5]), professores))
-                index += 1
-
-        print(professores)
+                nos.append(Disciplina(indice, curso, ppc, periodo, codigo_disciplina, nome_disciplina, ch, professores))
+                indice += 1
 
         return nos
 
 
-def criarListaAdjacencia(nos: list) -> dict:
+def criarListaAdjacencia(nos: list[Disciplina]) -> dict[int, set[int]] :
     listaAdjacencia = {}
 
     for i in range(len(nos)):
@@ -130,7 +138,7 @@ def criarGrafoTurmas(nos: list) -> dict:
 
             if i == j:
                 continue
-
+            
             if nos[i].turma == nos[j].turma:
                 arestas.add(j)
         
@@ -319,7 +327,7 @@ if __name__ == "__main__":
     caminho_csv = os.path.join("..", "datasets", "csv", "semestre1.csv")
 
     # Chama a função com o caminho ajustado
-    nos = classificarDf(caminho_csv)
+    nos = carregarDisciplinasCsv(caminho_csv)
     # arestas = fazerArestas(nos)
     arestas = criarListaAdjacencia(nos)
 
@@ -328,13 +336,14 @@ if __name__ == "__main__":
     print(f'Quantidade de cores: {colorirGrafo(nos, arestas)}')
 
     grafoPorTurmas = criarGrafoTurmas(nos)
+    # print(grafoPorTurmas)
 
     horarios = fazerDivisaoHorario(nos, arestas)
 
-    print(horarios)
+    # print(horarios)
 
     # Exibe os horários formatados
-    exibirHorariosPorTurma(horarios, nos)
+    # exibirHorariosPorTurma(horarios, nos)
 
 
 
