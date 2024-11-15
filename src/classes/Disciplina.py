@@ -1,6 +1,6 @@
 class Disciplina():
-    def __init__(self, index: int , curso: str, ppc: str, periodo: str, codigo: str, nome: str, ch: int, professores: list[int]):
-        self.index = index
+    def __init__(self, indice: int , curso: str, ppc: str, periodo: str, codigo: str, nome: str, ch: int, professores: list[int]):
+        self.indice = indice
         self.codigo = codigo
         self.nome = nome
         self.curso = curso

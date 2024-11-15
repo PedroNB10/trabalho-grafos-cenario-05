@@ -54,14 +54,14 @@ def carregarDisciplinasCsv(caminhoCsv: str) -> list[Disciplina]:
         return nos
 
 
-def criarListaAdjacencia(nos: list[Disciplina]) -> dict[int, set[int]] :
+def criarListaAdjacencia(nos: list[Disciplina]) -> dict[int, set[int]]:
     listaAdjacencia = {}
 
     for i in range(len(nos)):
 
         arestas = set()
 
-        for j in range(0, len(nos)):
+        for j in range(len(nos)):
 
             if i == j:
                 continue
@@ -72,9 +72,7 @@ def criarListaAdjacencia(nos: list[Disciplina]) -> dict[int, set[int]] :
 
             # se um dos cursos for sistemas e o outro nao for, nao precisa fazer as conexoes, ja que um é a noite e o outro nao
             if logicalXOR(nos[i].curso, nos[j].curso, 'SIN'):
-                #print(nos[i].curso, nos[j].curso)
-                continue
-            
+                arestas.add(j)
             if nos[i].turma == nos[j].turma:
                 arestas.add(j)
 
@@ -147,16 +145,16 @@ def criarGrafoTurmas(nos: list) -> dict:
     return grafoTurmas 
 
 
-def fazerDivisaoHorario(nos: list, grafoColorido: dict):
-    # Primeiro passo: Criar os horarios
+def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
+    # Primeiro passo: Criar os horarios, que são dicionários com os horarios de cada dia da semana
     horarios = [{}, {}, {}, {}, {}]
     for i in range(5):
         horarios[i] = {'M123': None, 'M45': None, 'T12': None, 'T345': None, 'N12': None, 'N345': None}
 
     
     # Segundo passo: Separar em listas de carga horaria 3 e 2
-    ch3 = []
-    ch2 = []
+    ch3: list[Disciplina] = []
+    ch2: list[Disciplina] = []
     for no in nos:
         if no.ch == 3:
             ch3.append(no)
@@ -343,7 +341,7 @@ if __name__ == "__main__":
     # print(horarios)
 
     # Exibe os horários formatados
-    # exibirHorariosPorTurma(horarios, nos)
+    exibirHorariosPorTurma(horarios, nos)
 
 
 
