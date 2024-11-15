@@ -24,7 +24,7 @@ def carregarDisciplinasCsv(caminhoCsv: str) -> list[Disciplina]:
         next(df)
 
         nos = []
-
+        indice = 0
         for linha in df:
             professores = []
             for i in range(6, TOTAL_COLUNAS_CABECALHO, 1): # a partir do 6 tem o Prof 1
@@ -38,7 +38,7 @@ def carregarDisciplinasCsv(caminhoCsv: str) -> list[Disciplina]:
             nome_disciplina = linha[4]
             ch = int(linha[5])
 
-            indice = 0
+            
             if ch == 5:
                 nos.append(Disciplina(indice, curso, ppc, periodo, codigo_disciplina, nome_disciplina, 3, professores))
                 nos.append(Disciplina(indice + 1, curso, ppc, periodo, codigo_disciplina, nome_disciplina, 2, professores))
