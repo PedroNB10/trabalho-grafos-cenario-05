@@ -144,6 +144,9 @@ def criarGrafoTurmas(nos: list) -> dict:
 
 
 def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
+    # Define uma semente fixa para os números aleatórios
+    random.seed(42)
+
     # Primeiro passo: Criar os horarios, que são dicionários com os horarios de cada dia da semana
     horarios = [{}, {}, {}, {}, {}]
     for i in range(5):
