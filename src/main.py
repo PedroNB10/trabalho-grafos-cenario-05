@@ -15,13 +15,10 @@ def carregarDisciplinasCsv(caminhoCsv: str) -> list[Disciplina]:
 
     # Lê os dados do CSV
     with open(caminho_absoluto, encoding="utf-8") as arquivo:
-
         df = csv.reader(arquivo)
         # Lê o cabeçalho para obter a quantidade de colunas
-        TOTAL_COLUNAS_CABECALHO = len(next(df))
-        
-        # Pula o cabeçalho
-        next(df)
+        cabecalho = next(df)
+        TOTAL_COLUNAS_CABECALHO = len(cabecalho)
 
         nos = []
         indice = 0
