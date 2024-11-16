@@ -52,6 +52,6 @@ def csvParaImagemTabelaUnica(caminhoCsv, caminhoImagem):
     plt.savefig(caminhoImagem, bbox_inches="tight", dpi=400, format="pdf")
 
 # Exemplo de uso:
-caminhoPdf = os.path.join("..", "..", "datasets","tabelas-convertidas", "semestre1.pdf")
-arquivo_csv = 'semestre1.csv'
+caminhoPdf = os.path.join("..", "..", "datasets","tabelas-convertidas", "semestre2.pdf")
+arquivo_csv = 'semestre2.csv'
 csvParaImagemTabelaUnica(f"../../datasets/csv/{arquivo_csv}", caminhoPdf)
