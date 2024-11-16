@@ -1,5 +1,6 @@
 import csv
 import os
+import random
 from classes.Disciplina import Disciplina
 
 from collections import defaultdict
@@ -160,6 +161,9 @@ def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
             ch3.append(no)
         else:
             ch2.append(no)
+    # Vamos usar o metodo shuffle para aleatoriezar um pouco a sequencia de horarios, evitando 5 horarios seguidos da mesma disciplina
+    random.shuffle(ch3)
+    random.shuffle(ch2)
     
     # Terceiro passo: Se separar uma cor para cada horario, podemos simplesmente conectar as disciplinas a suas respectivas cores
     for i in range(len(ch3)):
@@ -173,15 +177,18 @@ def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
                 if ch3[i].curso == 'SIN':
                     if (horarios[dia]['N345'] == None or horarios[dia]['N345'] == ch3[i].cor):
                         horarios[dia]['N345'] = ch3[i].cor
+                        ch3[i].horario = 'N345'
                         sucesso = True
                 
                 else:
                     if horarios[dia]['T345'] == None or horarios[dia]['T345'] == ch3[i].cor:
                         horarios[dia]['T345'] = ch3[i].cor
+                        ch3[i].horario = 'T345'
                         sucesso = True
 
                     elif horarios[dia]['M123'] == None or horarios[dia]['M123'] == ch3[i].cor:
                         horarios[dia]['M123'] = ch3[i].cor
+                        ch3[i].horario = 'M123'
                         sucesso = True
                 
                 if sucesso:
@@ -209,24 +216,30 @@ def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
 
                 if ch2[i].curso == 'SIN':
                     if (horarios[dia]['N345'] == ch2[i].cor):
+                        ch2[i].horario = 'N34'
                         sucesso = True
 
                     elif (horarios[dia]['N12'] == ch2[i].cor):
+                        ch2[i].horario = 'N12'
                         sucesso = True
 
                 
                 else:
                     if horarios[dia]['T345'] == ch2[i].cor:
+                        ch2[i].horario = 'T34'
                         sucesso = True
 
                     elif horarios[dia]['T12'] == ch2[i].cor:
+                        ch2[i].horario = 'T12'
                         sucesso = True
 
 
                     elif horarios[dia]['M123'] == ch2[i].cor:
+                        ch2[i].horario = 'M12'
                         sucesso = True
 
                     elif horarios[dia]['M45'] == ch2[i].cor:
+                        ch2[i].horario = 'M45'
                         sucesso = True
 
                 # se ja tiver achado a cor, quebra o loop
@@ -241,29 +254,35 @@ def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
                     if ch2[i].curso == 'SIN':
                         if (horarios[dia]['N345'] == None):
                             horarios[dia]['N345'] = ch2[i].cor
+                            ch2[i].horario = 'N34'
                             sucesso = True
 
                         elif (horarios[dia]['N12'] == None):
                             horarios[dia]['N12'] = ch2[i].cor
+                            ch2[i].horario = 'N12'
                             sucesso = True
 
                 
                     else:
                         if horarios[dia]['T345'] == None:
                             horarios[dia]['T345'] = ch2[i].cor
+                            ch2[i].horario = 'T34'
                             sucesso = True
 
                         elif horarios[dia]['T12'] == None:
                             horarios[dia]['T12'] = ch2[i].cor
+                            ch2[i].horario = 'T12'
                             sucesso = True
 
 
                         elif horarios[dia]['M123'] == None:
                             horarios[dia]['M123'] = ch2[i].cor
+                            ch2[i].horario = 'M12'
                             sucesso = True
 
                         elif horarios[dia]['M45'] == None:
                             horarios[dia]['M45'] = ch2[i].cor
+                            ch2[i].horario = 'M45'
                             sucesso = True
                     
                     # se ja tiver achado a cor, quebra o loop
