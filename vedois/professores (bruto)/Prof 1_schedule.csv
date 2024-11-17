@@ -1,0 +1,13 @@
+Dia,Turno,Horário,Curso,PPC,Período,Código,Disciplina,CH,Professor
+Segunda,T,1,CCO,2022,3,XDES04,Engenharia de Software I,4,Prof 1
+Segunda,T,2,CCO,2022,3,XDES04,Engenharia de Software I,4,Prof 1
+Segunda,T,3,CCO,2022,3,XDES04,Engenharia de Software I,4,Prof 1
+Segunda,T,4,CCO,2022,3,XDES04,Engenharia de Software I,4,Prof 1
+Segunda,N,1,CCO,0,7,COM212,Gerência de Projeto de Software,4,Prof 1
+Segunda,N,2,CCO,0,7,COM212,Gerência de Projeto de Software,4,Prof 1
+Segunda,N,3,CCO,0,7,COM212,Gerência de Projeto de Software,4,Prof 1
+Segunda,N,4,CCO,0,7,COM212,Gerência de Projeto de Software,4,Prof 1
+Segunda,M,1,Optativas,0,5,OPT3,Cloud Computing,4,Prof 1
+Segunda,M,2,Optativas,0,5,OPT3,Cloud Computing,4,Prof 1
+Segunda,M,3,Optativas,0,5,OPT3,Cloud Computing,4,Prof 1
+Segunda,M,4,Optativas,0,5,OPT3,Cloud Computing,4,Prof 1

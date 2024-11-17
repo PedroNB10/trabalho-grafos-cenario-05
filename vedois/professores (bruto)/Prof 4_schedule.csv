@@ -1,0 +1,12 @@
+Dia,Turno,Horário,Curso,PPC,Período,Código,Disciplina,CH,Professor
+Terça,T,3,CCO,0,5,COM240,Redes de Computadores,4,Prof 4
+Terça,T,4,CCO,0,5,COM240,Redes de Computadores,4,Prof 4
+Terça,N,1,CCO,0,5,COM240,Redes de Computadores,4,Prof 4
+Terça,N,2,CCO,0,5,COM240,Redes de Computadores,4,Prof 4
+Segunda,T,1,SIN,0,5,COM240,Redes de Computadores,4,Prof 4
+Segunda,T,2,SIN,0,5,COM240,Redes de Computadores,4,Prof 4
+Segunda,T,3,SIN,0,5,COM240,Redes de Computadores,4,Prof 4
+Segunda,T,4,SIN,0,5,COM240,Redes de Computadores,4,Prof 4
+Terça,T,1,SIN,2017,7,SIN414,Auditoria e Segurança de Sistemas de Informação,3,Prof 4
+Terça,T,2,SIN,2017,7,SIN414,Auditoria e Segurança de Sistemas de Informação,3,Prof 4
+Segunda,T,5,SIN,2017,7,SIN414,Auditoria e Segurança de Sistemas de Informação,3,Prof 4

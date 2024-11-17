@@ -1,0 +1,211 @@
+Dia,Turno,Horário,Curso,PPC,Período,Código,Disciplina,CH,Professor
+Segunda,M,1,CCO,0,5,COM211,Engenharia de Software II,4,Prof 8
+Segunda,M,2,CCO,0,5,COM211,Engenharia de Software II,4,Prof 8
+Segunda,M,3,CCO,0,5,COM211,Engenharia de Software II,4,Prof 8
+Segunda,M,4,CCO,0,5,COM211,Engenharia de Software II,4,Prof 8
+Segunda,M,1,CCO,2022,1,XDES01,Fundamentos de Programação,4,Prof 12
+Segunda,M,2,CCO,2022,1,XDES01,Fundamentos de Programação,4,Prof 12
+Segunda,M,3,CCO,2022,1,XDES01,Fundamentos de Programação,4,Prof 12
+Segunda,M,4,CCO,2022,1,XDES01,Fundamentos de Programação,4,Prof 12
+Segunda,T,1,CCO,2022,1,CRSC03,Arquitetura de Computadores I,4,Prof 13
+Segunda,T,2,CCO,2022,1,CRSC03,Arquitetura de Computadores I,4,Prof 13
+Segunda,T,3,CCO,2022,1,CRSC03,Arquitetura de Computadores I,4,Prof 13
+Segunda,T,4,CCO,2022,1,CRSC03,Arquitetura de Computadores I,4,Prof 13
+Segunda,N,1,CCO,2022,1,XMAC01,Matemática Discreta,4,Prof 5
+Segunda,N,2,CCO,2022,1,XMAC01,Matemática Discreta,4,Prof 5
+Segunda,N,3,CCO,2022,1,XMAC01,Matemática Discreta,4,Prof 5
+Segunda,N,4,CCO,2022,1,XMAC01,Matemática Discreta,4,Prof 5
+Terça,M,1,CCO,2022,1,CAHC04,Projeto Integrado,2,Prof 16
+Terça,M,2,CCO,2022,1,CAHC04,Projeto Integrado,2,Prof 16
+Segunda,M,1,CCO,2022,3,XDES02,Programação Orientada a Objetos,4,Prof 9
+Segunda,M,2,CCO,2022,3,XDES02,Programação Orientada a Objetos,4,Prof 9
+Segunda,M,3,CCO,2022,3,XDES02,Programação Orientada a Objetos,4,Prof 9
+Segunda,M,4,CCO,2022,3,XDES02,Programação Orientada a Objetos,4,Prof 9
+Segunda,T,1,CCO,2022,3,XDES04,Engenharia de Software I,4,Prof 1
+Segunda,T,2,CCO,2022,3,XDES04,Engenharia de Software I,4,Prof 1
+Segunda,T,3,CCO,2022,3,XDES04,Engenharia de Software I,4,Prof 1
+Segunda,T,4,CCO,2022,3,XDES04,Engenharia de Software I,4,Prof 1
+Segunda,N,1,CCO,2022,3,CRSC02,Sistemas Operacionais,4,Prof 13
+Segunda,N,2,CCO,2022,3,CRSC02,Sistemas Operacionais,4,Prof 13
+Segunda,N,3,CCO,2022,3,CRSC02,Sistemas Operacionais,4,Prof 13
+Segunda,N,4,CCO,2022,3,CRSC02,Sistemas Operacionais,4,Prof 13
+Terça,M,1,CCO,2022,3,CTCO02,Algoritmos e Estrutura de Dados II,4,Prof 18
+Terça,M,2,CCO,2022,3,CTCO02,Algoritmos e Estrutura de Dados II,4,Prof 18
+Terça,M,3,CCO,2022,3,CTCO02,Algoritmos e Estrutura de Dados II,4,Prof 18
+Terça,M,4,CCO,2022,3,CTCO02,Algoritmos e Estrutura de Dados II,4,Prof 18
+Terça,T,1,CCO,2022,3,XMAC02,Métodos Matemáticos para Análise de Dados,4,Prof 9
+Terça,T,2,CCO,2022,3,XMAC02,Métodos Matemáticos para Análise de Dados,4,Prof 9
+Terça,T,3,CCO,2022,3,XMAC02,Métodos Matemáticos para Análise de Dados,4,Prof 9
+Terça,T,4,CCO,2022,3,XMAC02,Métodos Matemáticos para Análise de Dados,4,Prof 9
+Terça,N,1,CCO,2022,3,CMAC03,Algoritmos em Grafos,4,Prof 16
+Terça,N,2,CCO,2022,3,CMAC03,Algoritmos em Grafos,4,Prof 16
+Terça,N,3,CCO,2022,3,CMAC03,Algoritmos em Grafos,4,Prof 16
+Terça,N,4,CCO,2022,3,CMAC03,Algoritmos em Grafos,4,Prof 16
+Segunda,T,1,CCO,0,5,CIC111,Análise e Projeto de Algoritmos II,3,Prof 14
+Segunda,T,2,CCO,0,5,CIC111,Análise e Projeto de Algoritmos II,3,Prof 14
+Segunda,M,5,CCO,0,5,CIC111,Análise e Projeto de Algoritmos II,3,Prof 14
+Segunda,T,3,CCO,0,5,CIC132,Linguagens Formais e Autômatos,4,Prof 5
+Segunda,T,4,CCO,0,5,CIC132,Linguagens Formais e Autômatos,4,Prof 5
+Terça,M,1,CCO,0,5,CIC132,Linguagens Formais e Autômatos,4,Prof 5
+Terça,M,2,CCO,0,5,CIC132,Linguagens Formais e Autômatos,4,Prof 5
+Segunda,N,1,CCO,0,5,COM221,Computação Orientada a Objetos II,4,Prof 10
+Segunda,N,2,CCO,0,5,COM221,Computação Orientada a Objetos II,4,Prof 10
+Segunda,N,3,CCO,0,5,COM221,Computação Orientada a Objetos II,4,Prof 10
+Segunda,N,4,CCO,0,5,COM221,Computação Orientada a Objetos II,4,Prof 10
+Terça,M,3,CCO,0,5,COM230,Banco de Dados I,4,Prof 12
+Terça,M,4,CCO,0,5,COM230,Banco de Dados I,4,Prof 12
+Terça,T,1,CCO,0,5,COM230,Banco de Dados I,4,Prof 12
+Terça,T,2,CCO,0,5,COM230,Banco de Dados I,4,Prof 12
+Terça,T,3,CCO,0,5,COM240,Redes de Computadores,4,Prof 4
+Terça,T,4,CCO,0,5,COM240,Redes de Computadores,4,Prof 4
+Terça,N,1,CCO,0,5,COM240,Redes de Computadores,4,Prof 4
+Terça,N,2,CCO,0,5,COM240,Redes de Computadores,4,Prof 4
+Terça,N,3,CCO,0,5,COM311,Análise de Investimento em Informática,3,Prof 2
+Terça,N,4,CCO,0,5,COM311,Análise de Investimento em Informática,3,Prof 2
+Segunda,T,5,CCO,0,5,COM311,Análise de Investimento em Informática,3,Prof 2
+Segunda,M,1,CCO,0,7,CIC271,Processamento Digital de Imagens,4,Prof 7
+Segunda,M,2,CCO,0,7,CIC271,Processamento Digital de Imagens,4,Prof 7
+Segunda,M,3,CCO,0,7,CIC271,Processamento Digital de Imagens,4,Prof 7
+Segunda,M,4,CCO,0,7,CIC271,Processamento Digital de Imagens,4,Prof 7
+Segunda,N,1,CCO,0,7,COM212,Gerência de Projeto de Software,4,Prof 1
+Segunda,N,2,CCO,0,7,COM212,Gerência de Projeto de Software,4,Prof 1
+Segunda,N,3,CCO,0,7,COM212,Gerência de Projeto de Software,4,Prof 1
+Segunda,N,4,CCO,0,7,COM212,Gerência de Projeto de Software,4,Prof 1
+Segunda,T,1,CCO,0,7,COM213,Interação Humano-Computador,4,Prof 6
+Segunda,T,2,CCO,0,7,COM213,Interação Humano-Computador,4,Prof 6
+Segunda,T,3,CCO,0,7,COM213,Interação Humano-Computador,4,Prof 6
+Segunda,T,4,CCO,0,7,COM213,Interação Humano-Computador,4,Prof 6
+Terça,M,1,CCO,0,7,COM222,Desenvolvimento de Sistemas na Web,5,Prof 15
+Terça,M,2,CCO,0,7,COM222,Desenvolvimento de Sistemas na Web,5,Prof 15
+Terça,M,3,CCO,0,7,COM222,Desenvolvimento de Sistemas na Web,5,Prof 15
+Terça,M,4,CCO,0,7,COM222,Desenvolvimento de Sistemas na Web,5,Prof 15
+Segunda,M,5,CCO,0,7,COM222,Desenvolvimento de Sistemas na Web,5,Prof 15
+Terça,T,1,CCO,0,7,COM242,Sistemas Distribuídos,4,Prof 16
+Terça,T,2,CCO,0,7,COM242,Sistemas Distribuídos,4,Prof 16
+Terça,T,3,CCO,0,7,COM242,Sistemas Distribuídos,4,Prof 16
+Terça,T,4,CCO,0,7,COM242,Sistemas Distribuídos,4,Prof 16
+Segunda,N,1,SIN,2022,1,XDES01,Fundamentos de Programação,4,Prof 15
+Segunda,N,2,SIN,2022,1,XDES01,Fundamentos de Programação,4,Prof 15
+Segunda,N,3,SIN,2022,1,XDES01,Fundamentos de Programação,4,Prof 15
+Segunda,N,4,SIN,2022,1,XDES01,Fundamentos de Programação,4,Prof 15
+Segunda,M,1,SIN,2022,1,SAHC04,Projeto Integrado,2,Prof 6
+Segunda,M,2,SIN,2022,1,SAHC04,Projeto Integrado,2,Prof 6
+Segunda,T,1,SIN,2022,1,SAHC05,Fundamentos de Sistemas de Informação,4,Prof 10
+Segunda,T,2,SIN,2022,1,SAHC05,Fundamentos de Sistemas de Informação,4,Prof 10
+Segunda,T,3,SIN,2022,1,SAHC05,Fundamentos de Sistemas de Informação,4,Prof 10
+Segunda,T,4,SIN,2022,1,SAHC05,Fundamentos de Sistemas de Informação,4,Prof 10
+Segunda,T,1,SIN,2022,3,XDES03,Programação Web,4,Prof 15
+Segunda,T,2,SIN,2022,3,XDES03,Programação Web,4,Prof 15
+Segunda,T,3,SIN,2022,3,XDES03,Programação Web,4,Prof 15
+Segunda,T,4,SIN,2022,3,XDES03,Programação Web,4,Prof 15
+Segunda,N,1,SIN,2022,3,SDES05,Engenharia de Software II,4,Prof 8
+Segunda,N,2,SIN,2022,3,SDES05,Engenharia de Software II,4,Prof 8
+Segunda,N,3,SIN,2022,3,SDES05,Engenharia de Software II,4,Prof 8
+Segunda,N,4,SIN,2022,3,SDES05,Engenharia de Software II,4,Prof 8
+Segunda,M,1,SIN,2022,3,STCO02,Algoritmos e Programação II,4,Prof 14
+Segunda,M,2,SIN,2022,3,STCO02,Algoritmos e Programação II,4,Prof 14
+Segunda,M,3,SIN,2022,3,STCO02,Algoritmos e Programação II,4,Prof 14
+Segunda,M,4,SIN,2022,3,STCO02,Algoritmos e Programação II,4,Prof 14
+Terça,N,1,SIN,2022,3,SRSC03,Organização e Arquitetura de Computadores,4,Prof 11
+Terça,N,2,SIN,2022,3,SRSC03,Organização e Arquitetura de Computadores,4,Prof 11
+Terça,N,3,SIN,2022,3,SRSC03,Organização e Arquitetura de Computadores,4,Prof 11
+Terça,N,4,SIN,2022,3,SRSC03,Organização e Arquitetura de Computadores,4,Prof 11
+Terça,T,1,SIN,0,3,MAT017,Fundamentos de Lógica e Matemática Discreta,4,Prof 5
+Terça,T,2,SIN,0,3,MAT017,Fundamentos de Lógica e Matemática Discreta,4,Prof 5
+Terça,T,3,SIN,0,3,MAT017,Fundamentos de Lógica e Matemática Discreta,4,Prof 5
+Terça,T,4,SIN,0,3,MAT017,Fundamentos de Lógica e Matemática Discreta,4,Prof 5
+Terça,M,1,SIN,0,3,COM220,Computação Orientada a Objetos I,4,Prof 9
+Terça,M,2,SIN,0,3,COM220,Computação Orientada a Objetos I,4,Prof 9
+Terça,M,3,SIN,0,3,COM220,Computação Orientada a Objetos I,4,Prof 9
+Terça,M,4,SIN,0,3,COM220,Computação Orientada a Objetos I,4,Prof 9
+Segunda,N,1,SIN,0,5,SIN260,Sistemas Inteligentes,4,Prof 7
+Segunda,N,2,SIN,0,5,SIN260,Sistemas Inteligentes,4,Prof 7
+Segunda,N,3,SIN,0,5,SIN260,Sistemas Inteligentes,4,Prof 7
+Segunda,N,4,SIN,0,5,SIN260,Sistemas Inteligentes,4,Prof 7
+Segunda,T,1,SIN,0,5,COM240,Redes de Computadores,4,Prof 4
+Segunda,T,2,SIN,0,5,COM240,Redes de Computadores,4,Prof 4
+Segunda,T,3,SIN,0,5,COM240,Redes de Computadores,4,Prof 4
+Segunda,T,4,SIN,0,5,COM240,Redes de Computadores,4,Prof 4
+Segunda,M,1,SIN,2017,5,SIN132,Linguagens Formais e Autômatos,4,Prof 5
+Segunda,M,2,SIN,2017,5,SIN132,Linguagens Formais e Autômatos,4,Prof 5
+Segunda,M,3,SIN,2017,5,SIN132,Linguagens Formais e Autômatos,4,Prof 5
+Segunda,M,4,SIN,2017,5,SIN132,Linguagens Formais e Autômatos,4,Prof 5
+Terça,N,1,SIN,2017,5,COM231,Banco de Dados II,4,Prof 18
+Terça,N,2,SIN,2017,5,COM231,Banco de Dados II,4,Prof 18
+Terça,N,3,SIN,2017,5,COM231,Banco de Dados II,4,Prof 18
+Terça,N,4,SIN,2017,5,COM231,Banco de Dados II,4,Prof 18
+Segunda,T,1,SIN,2017,7,SIN210,Governança de TI,4,Prof 8
+Segunda,T,2,SIN,2017,7,SIN210,Governança de TI,4,Prof 8
+Segunda,T,3,SIN,2017,7,SIN210,Governança de TI,4,Prof 8
+Segunda,T,4,SIN,2017,7,SIN210,Governança de TI,4,Prof 8
+Segunda,N,1,SIN,2017,7,COM213,Interação Humano-Computador,4,Prof 6
+Segunda,N,2,SIN,2017,7,COM213,Interação Humano-Computador,4,Prof 6
+Segunda,N,3,SIN,2017,7,COM213,Interação Humano-Computador,4,Prof 6
+Segunda,N,4,SIN,2017,7,COM213,Interação Humano-Computador,4,Prof 6
+Segunda,M,1,SIN,2017,7,SIN412,Desenvolvimento de Aplicações em SI,5,Prof 10
+Segunda,M,2,SIN,2017,7,SIN412,Desenvolvimento de Aplicações em SI,5,Prof 10
+Segunda,M,3,SIN,2017,7,SIN412,Desenvolvimento de Aplicações em SI,5,Prof 10
+Segunda,M,4,SIN,2017,7,SIN412,Desenvolvimento de Aplicações em SI,5,Prof 10
+Segunda,N,5,SIN,2017,7,SIN412,Desenvolvimento de Aplicações em SI,5,Prof 10
+Terça,N,1,SIN,2017,7,SIN413,Inteligência de Negócios,4,Prof 8
+Terça,N,2,SIN,2017,7,SIN413,Inteligência de Negócios,4,Prof 8
+Terça,N,3,SIN,2017,7,SIN413,Inteligência de Negócios,4,Prof 8
+Terça,N,4,SIN,2017,7,SIN413,Inteligência de Negócios,4,Prof 8
+Terça,T,1,SIN,2017,7,SIN414,Auditoria e Segurança de Sistemas de Informação,3,Prof 4
+Terça,T,2,SIN,2017,7,SIN414,Auditoria e Segurança de Sistemas de Informação,3,Prof 4
+Segunda,T,5,SIN,2017,7,SIN414,Auditoria e Segurança de Sistemas de Informação,3,Prof 4
+Terça,T,3,SIN,2017,7,SIN313,Organização e Métodos,3,Prof 2
+Terça,T,4,SIN,2017,7,SIN313,Organização e Métodos,3,Prof 2
+Segunda,M,5,SIN,2017,7,SIN313,Organização e Métodos,3,Prof 2
+Segunda,M,1,Optativas,0,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
+Segunda,M,2,Optativas,0,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
+Segunda,M,3,Optativas,0,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
+Segunda,M,4,Optativas,0,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
+Segunda,T,1,Optativas,0,3,OPT2,Redes Complexas,4,Prof 17
+Segunda,T,2,Optativas,0,3,OPT2,Redes Complexas,4,Prof 17
+Segunda,T,3,Optativas,0,3,OPT2,Redes Complexas,4,Prof 17
+Segunda,T,4,Optativas,0,3,OPT2,Redes Complexas,4,Prof 17
+Segunda,M,1,Optativas,0,5,OPT3,Cloud Computing,4,Prof 1
+Segunda,M,2,Optativas,0,5,OPT3,Cloud Computing,4,Prof 1
+Segunda,M,3,Optativas,0,5,OPT3,Cloud Computing,4,Prof 1
+Segunda,M,4,Optativas,0,5,OPT3,Cloud Computing,4,Prof 1
+Segunda,M,1,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EMT),4,Prof 3
+Segunda,M,2,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EMT),4,Prof 3
+Segunda,M,3,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EMT),4,Prof 3
+Segunda,M,4,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EMT),4,Prof 3
+Segunda,T,1,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EME),4,Prof 3
+Segunda,T,2,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EME),4,Prof 3
+Segunda,T,3,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EME),4,Prof 3
+Segunda,T,4,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EME),4,Prof 3
+Segunda,N,1,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EBP / ECI),4,Prof 3
+Segunda,N,2,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EBP / ECI),4,Prof 3
+Segunda,N,3,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EBP / ECI),4,Prof 3
+Segunda,N,4,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EBP / ECI),4,Prof 3
+Terça,M,1,Outros Cursos,0,1,CCO016,Fundamentos de Programação (MBA),4,Prof 11
+Terça,M,2,Outros Cursos,0,1,CCO016,Fundamentos de Programação (MBA),4,Prof 11
+Terça,M,3,Outros Cursos,0,1,CCO016,Fundamentos de Programação (MBA),4,Prof 11
+Terça,M,4,Outros Cursos,0,1,CCO016,Fundamentos de Programação (MBA),4,Prof 11
+Terça,T,1,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EMA / EEN),4,Prof 3
+Terça,T,2,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EMA / EEN),4,Prof 3
+Terça,T,3,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EMA / EEN),4,Prof 3
+Terça,T,4,Outros Cursos,0,1,CCO016,Fundamentos de Programação (EMA / EEN),4,Prof 3
+Terça,M,1,Optativas,0,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
+Terça,M,2,Optativas,0,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
+Terça,M,3,Optativas,0,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
+Terça,M,4,Optativas,0,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
+Segunda,T,3,Pós Graduação,0,3,POS1,Design Patterns,4,Prof 14
+Segunda,T,4,Pós Graduação,0,3,POS1,Design Patterns,4,Prof 14
+Segunda,N,1,Pós Graduação,0,3,POS1,Design Patterns,4,Prof 14
+Segunda,N,2,Pós Graduação,0,3,POS1,Design Patterns,4,Prof 14
+Segunda,M,1,Pós Graduação,0,4,POS2,Visualização da Informação,4,Prof 13
+Segunda,M,2,Pós Graduação,0,4,POS2,Visualização da Informação,4,Prof 13
+Segunda,M,3,Pós Graduação,0,4,POS2,Visualização da Informação,4,Prof 13
+Segunda,M,4,Pós Graduação,0,4,POS2,Visualização da Informação,4,Prof 13
+Segunda,T,1,Pós Graduação,0,5,POS3,Visão Computacional,4,Prof 12
+Segunda,T,2,Pós Graduação,0,5,POS3,Visão Computacional,4,Prof 12
+Segunda,T,3,Pós Graduação,0,5,POS3,Visão Computacional,4,Prof 12
+Segunda,T,4,Pós Graduação,0,5,POS3,Visão Computacional,4,Prof 12
+Segunda,M,3,Pós Graduação,0,5,POS5,Robótica,4,Prof 6
+Segunda,M,4,Pós Graduação,0,5,POS5,Robótica,4,Prof 6
+Terça,M,1,Pós Graduação,0,5,POS5,Robótica,4,Prof 6
+Terça,M,2,Pós Graduação,0,5,POS5,Robótica,4,Prof 6

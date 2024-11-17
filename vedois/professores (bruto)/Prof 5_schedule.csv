@@ -1,0 +1,17 @@
+Dia,Turno,Horário,Curso,PPC,Período,Código,Disciplina,CH,Professor
+Segunda,N,1,CCO,2022,1,XMAC01,Matemática Discreta,4,Prof 5
+Segunda,N,2,CCO,2022,1,XMAC01,Matemática Discreta,4,Prof 5
+Segunda,N,3,CCO,2022,1,XMAC01,Matemática Discreta,4,Prof 5
+Segunda,N,4,CCO,2022,1,XMAC01,Matemática Discreta,4,Prof 5
+Segunda,T,3,CCO,0,5,CIC132,Linguagens Formais e Autômatos,4,Prof 5
+Segunda,T,4,CCO,0,5,CIC132,Linguagens Formais e Autômatos,4,Prof 5
+Terça,M,1,CCO,0,5,CIC132,Linguagens Formais e Autômatos,4,Prof 5
+Terça,M,2,CCO,0,5,CIC132,Linguagens Formais e Autômatos,4,Prof 5
+Terça,T,1,SIN,0,3,MAT017,Fundamentos de Lógica e Matemática Discreta,4,Prof 5
+Terça,T,2,SIN,0,3,MAT017,Fundamentos de Lógica e Matemática Discreta,4,Prof 5
+Terça,T,3,SIN,0,3,MAT017,Fundamentos de Lógica e Matemática Discreta,4,Prof 5
+Terça,T,4,SIN,0,3,MAT017,Fundamentos de Lógica e Matemática Discreta,4,Prof 5
+Segunda,M,1,SIN,2017,5,SIN132,Linguagens Formais e Autômatos,4,Prof 5
+Segunda,M,2,SIN,2017,5,SIN132,Linguagens Formais e Autômatos,4,Prof 5
+Segunda,M,3,SIN,2017,5,SIN132,Linguagens Formais e Autômatos,4,Prof 5
+Segunda,M,4,SIN,2017,5,SIN132,Linguagens Formais e Autômatos,4,Prof 5
