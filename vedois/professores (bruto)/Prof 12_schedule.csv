@@ -1,13 +1,13 @@
-Dia,Turno,Horário,Curso,PPC,Período,Código,Disciplina,CH,Professor
-Segunda,M,1,CCO,2022,1,XDES01,Fundamentos de Programação,4,Prof 12
-Segunda,M,2,CCO,2022,1,XDES01,Fundamentos de Programação,4,Prof 12
-Segunda,M,3,CCO,2022,1,XDES01,Fundamentos de Programação,4,Prof 12
-Segunda,M,4,CCO,2022,1,XDES01,Fundamentos de Programação,4,Prof 12
-Terça,M,3,CCO,0,5,COM230,Banco de Dados I,4,Prof 12
-Terça,M,4,CCO,0,5,COM230,Banco de Dados I,4,Prof 12
-Terça,T,1,CCO,0,5,COM230,Banco de Dados I,4,Prof 12
-Terça,T,2,CCO,0,5,COM230,Banco de Dados I,4,Prof 12
-Segunda,T,1,Pós Graduação,0,5,POS3,Visão Computacional,4,Prof 12
-Segunda,T,2,Pós Graduação,0,5,POS3,Visão Computacional,4,Prof 12
-Segunda,T,3,Pós Graduação,0,5,POS3,Visão Computacional,4,Prof 12
-Segunda,T,4,Pós Graduação,0,5,POS3,Visão Computacional,4,Prof 12
+Dia,Turno,Horário,Curso,Período,Código,Disciplina,CH,Professor
+Segunda,M,1,CCO,1,XDES01,Fundamentos de Programação,4,Prof 12
+Segunda,M,2,CCO,1,XDES01,Fundamentos de Programação,4,Prof 12
+Segunda,M,3,CCO,1,XDES01,Fundamentos de Programação,4,Prof 12
+Segunda,M,4,CCO,1,XDES01,Fundamentos de Programação,4,Prof 12
+Quinta,M,1,CCO,5,COM230,Banco de Dados I,4,Prof 12
+Quinta,M,2,CCO,5,COM230,Banco de Dados I,4,Prof 12
+Quinta,M,3,CCO,5,COM230,Banco de Dados I,4,Prof 12
+Quinta,M,4,CCO,5,COM230,Banco de Dados I,4,Prof 12
+Terça,M,3,Pós Graduação,5,POS3,Visão Computacional,4,Prof 12
+Terça,M,4,Pós Graduação,5,POS3,Visão Computacional,4,Prof 12
+Terça,M,1,Pós Graduação,5,POS3,Visão Computacional,4,Prof 12
+Terça,M,2,Pós Graduação,5,POS3,Visão Computacional,4,Prof 12

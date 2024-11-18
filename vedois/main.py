@@ -9,6 +9,8 @@ from openpyxl.styles import Alignment, PatternFill
 from openpyxl.utils import get_column_letter
 import random
 
+# adicionei a verificação em "check_conflicts" para impedir que o curso de CCO tenha disciplinas alocadas no periodo noturno
+# adicionei a verificação em "generate_schedules" para impedir que um professor ultrapasse as 6 horas de aula por dia (no máximo 6 aulas)
 
 # Criar diretórios caso não existam
 os.makedirs('dataset', exist_ok=True)
@@ -101,6 +103,20 @@ def check_conflicts(schedule, new_allocation):
     curso, periodo = new_allocation['Curso'], new_allocation['Período']
     professor = new_allocation['Professor']
     
+    # Verificar restrição de horários por curso
+    if curso == 'CCO' and turno == 'N':  # CCO não pode ter aulas à noite
+        return True
+    if curso == 'SIN' and turno != 'N':  # SIN só pode ter aulas à noite
+        return True
+    
+    # Verificar limite de 6 horas por dia para professor
+    prof_aulas_dia = schedule[
+        (schedule['Dia'] == dia) & 
+        (schedule['Professor'] == professor)
+    ]
+    if len(prof_aulas_dia) >= 6:
+        return True
+    
     # Verificar conflitos no mesmo horário
     conflitos = schedule[
         (schedule['Dia'] == dia) & 
@@ -150,114 +166,187 @@ def dsatur_coloring(graph):
     return colors
 
 def generate_schedules():
+    MAX_ATTEMPTS = 1000  # Número máximo de tentativas para alocar uma disciplina
     schedules = {}
     dias = ['Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta']
     turnos = ['M', 'T', 'N']
-    horarios = range(1, 6)
+    horarios = list(range(1, 6))
     
     # Criar um DataFrame global para rastrear todas as alocações
-    global_schedule = pd.DataFrame(columns=['Dia', 'Turno', 'Horário', 'Curso', 'PPC', 
+    global_schedule = pd.DataFrame(columns=['Dia', 'Turno', 'Horário', 'Curso',
                                           'Período', 'Código', 'Disciplina', 'CH', 'Professor'])
     
-    # Ordenar disciplinas por restrições
+    # Criar arquivo de log para disciplinas não alocadas
+    log_path = "disciplinas_nao_alocadas.log"
+    with open(log_path, "w") as log_file:
+        log_file.write("Disciplinas não alocadas completamente:\n")
+    
+    # Ordenar disciplinas por restrições e carga horária
     disciplinas = []
     for _, row in df.iterrows():
         profs = sum([1 for i in range(1, 19) if row[f'Prof {i}'] == 1])
         disciplinas.append({
             'row': row,
-            'restricoes': profs + (1 if row['Curso'] in ['CCO', 'SIN'] else 0)
+            'restricoes': profs + (2 if row['Curso'] in ['CCO', 'SIN'] else 0) + (row['CH'] / 2)
         })
     
+    # Ordenar por número de restrições e CH (mais restritivas primeiro)
     disciplinas.sort(key=lambda x: x['restricoes'], reverse=True)
     
+    def find_sequential_slot(prof, row, turno, remaining_ch):
+        """
+        Tenta encontrar slots sequenciais para a disciplina no mesmo dia e turno
+        """
+        for dia in dias:
+            prof_aulas_dia = len(global_schedule[
+                (global_schedule['Dia'] == dia) & 
+                (global_schedule['Professor'] == prof)
+            ])
+            
+            if prof_aulas_dia >= 6:
+                continue
+                
+            # Verificar sequência de horários disponíveis
+            for horario_inicial in horarios:
+                if horario_inicial + remaining_ch > 6:
+                    continue
+                    
+                pode_alocar = True
+                new_allocations = []
+                
+                for h in range(remaining_ch):
+                    new_allocation = {
+                        'Dia': dia,
+                        'Turno': turno,
+                        'Horário': horario_inicial + h,
+                        'Curso': row['Curso'],
+                        'Período': row['Período'],
+                        'Código': row['Código da Disciplina'],
+                        'Disciplina': row['Nome da Disciplina'],
+                        'CH': row['CH'],
+                        'Professor': prof
+                    }
+                    
+                    if check_conflicts(global_schedule, new_allocation):
+                        pode_alocar = False
+                        break
+                        
+                    new_allocations.append(new_allocation)
+                
+                if pode_alocar:
+                    return new_allocations
+                    
+        return None
+
     # Alocar disciplinas
     for disc in disciplinas:
         row = disc['row']
         ch = row['CH']
+        curso = row['Curso']
         
         # Identificar professor(es)
         profs = [f'Prof {i}' for i in range(1, 19) if row[f'Prof {i}'] == 1]
         
-        # Definir turnos preferenciais
-        turnos_pref = []
-        if row['Curso'] == 'CCO':
-            turnos_pref = ['M', 'T', 'N']
-        elif row['Curso'] == 'SIN':
-            turnos_pref = ['N', 'T', 'M']
+        # Definir turnos baseado no curso
+        if curso == 'CCO':
+            turnos_pref = ['M', 'T']  # CCO só pode ter aulas de manhã e tarde
+        elif curso == 'SIN':
+            turnos_pref = ['N']  # SIN só pode ter aulas à noite
         else:
-            turnos_pref = ['M', 'T', 'N']
+            turnos_pref = turnos  # Outros cursos podem ter aulas em qualquer turno
         
-        # Alocar blocos de aula
+        # Alocar aulas
         remaining_ch = ch
-        while remaining_ch > 0:
-            block_size = min(2, remaining_ch)
+        total_attempts = 0
+        
+        while remaining_ch > 0 and total_attempts < MAX_ATTEMPTS:
             allocated = False
             
+            # Tentar primeiro alocar em sequência
             for prof in profs:
-                for dia in dias:
-                    for turno in turnos_pref:
-                        for horario in horarios:
-                            if horario + block_size <= 6:
-                                pode_alocar = True
-                                
-                                for h in range(block_size):
-                                    new_allocation = {
-                                        'Dia': dia,
-                                        'Turno': turno,
-                                        'Horário': horario + h,
-                                        'Curso': row['Curso'],
-                                        'PPC': row['PPC'],
-                                        'Período': row['Período'],
-                                        'Código': row['Código da Disciplina'],
-                                        'Disciplina': row['Nome da Disciplina'],
-                                        'CH': row['CH'],
-                                        'Professor': prof
-                                    }
-                                    
-                                    if check_conflicts(global_schedule, new_allocation):
-                                        pode_alocar = False
-                                        break
-                                
-                                if pode_alocar:
-                                    for h in range(block_size):
-                                        new_allocation = {
-                                            'Dia': dia,
-                                            'Turno': turno,
-                                            'Horário': horario + h,
-                                            'Curso': row['Curso'],
-                                            'PPC': row['PPC'],
-                                            'Período': row['Período'],
-                                            'Código': row['Código da Disciplina'],
-                                            'Disciplina': row['Nome da Disciplina'],
-                                            'CH': row['CH'],
-                                            'Professor': prof
-                                        }
-                                        global_schedule = pd.concat([global_schedule, 
-                                                                   pd.DataFrame([new_allocation])], 
-                                                                  ignore_index=True)
-                                    allocated = True
-                                    break
-                            
-                        if allocated:
-                            break
+                for turno in turnos_pref:
                     if allocated:
                         break
-                if allocated:
-                    break
+                        
+                    sequential_slots = find_sequential_slot(prof, row, turno, min(2, remaining_ch))
+                    if sequential_slots:
+                        for allocation in sequential_slots:
+                            global_schedule = pd.concat([global_schedule, 
+                                                       pd.DataFrame([allocation])], 
+                                                      ignore_index=True)
+                        allocated = True
+                        remaining_ch -= len(sequential_slots)
+                        break
+            
+            # Se não foi possível alocar em sequência, tenta alocar individualmente
+            if not allocated:
+                random.shuffle(dias)
+                random.shuffle(horarios)
+                
+                for prof in profs:
+                    if allocated:
+                        break
+                        
+                    for dia in dias:
+                        if allocated:
+                            break
+                            
+                        for turno in turnos_pref:
+                            if allocated:
+                                break
+                                
+                            # Verificar quantidade de aulas do professor no dia
+                            prof_aulas_dia = len(global_schedule[
+                                (global_schedule['Dia'] == dia) & 
+                                (global_schedule['Professor'] == prof)
+                            ])
+                            
+                            if prof_aulas_dia >= 6:
+                                continue
+                                
+                            for horario in horarios:
+                                new_allocation = {
+                                    'Dia': dia,
+                                    'Turno': turno,
+                                    'Horário': horario,
+                                    'Curso': curso,
+                                    'Período': row['Período'],
+                                    'Código': row['Código da Disciplina'],
+                                    'Disciplina': row['Nome da Disciplina'],
+                                    'CH': row['CH'],
+                                    'Professor': prof
+                                }
+                                
+                                if not check_conflicts(global_schedule, new_allocation):
+                                    global_schedule = pd.concat([global_schedule, 
+                                                               pd.DataFrame([new_allocation])], 
+                                                              ignore_index=True)
+                                    allocated = True
+                                    remaining_ch -= 1
+                                    break
             
             if not allocated:
-                if block_size == 2:
-                    continue
-                else:
-                    print(f"Não foi possível alocar completamente a disciplina {row['Nome da Disciplina']}")
-                    break
+                total_attempts += 1
             
-            remaining_ch -= block_size
+            if total_attempts >= MAX_ATTEMPTS:
+                print(f"AVISO: Não foi possível alocar completamente a disciplina {row['Nome da Disciplina']} após {MAX_ATTEMPTS} tentativas")
+                break
     
     # Separar schedules por professor
     for i in range(1, 19):
         prof = f'Prof {i}'
         schedules[prof] = global_schedule[global_schedule['Professor'] == prof].copy()
+    
+    # Verificar disciplinas não alocadas completamente
+    with open(log_path, "a") as log_file:
+        for disc in disciplinas:
+            row = disc['row']
+            aulas_alocadas = len(global_schedule[global_schedule['Código'] == row['Código da Disciplina']])
+            if aulas_alocadas < row['CH']:
+                msg = (f"Disciplina {row['Nome da Disciplina']} ({row['Código da Disciplina']}) - "
+                       f"CH necessária: {row['CH']}, CH alocada: {aulas_alocadas}\n")
+                print(msg.strip())
+                log_file.write(msg)
     
     return schedules, global_schedule
 
@@ -462,17 +551,17 @@ def gerar_planilhas():
     # Criar pasta "alunos (importar)" se não existir
     os.makedirs('alunos (importar)', exist_ok=True)
 
-    # Agrupar por Curso, PPC e Período
-    grupos = df.groupby(['Curso', 'PPC', 'Período'])
+    # Agrupar por Curso e Período
+    grupos = df.groupby(['Curso', 'Período'])
 
-    for (curso, ppc, periodo), grupo in grupos:
+    for (curso, periodo), grupo in grupos:
         # Criar uma nova planilha
         wb = Workbook()
         ws = wb.active
         ws.title = f'{curso}_{periodo}'
 
         # Adicionar cabeçalho
-        ws['A1'] = f'{curso} {ppc} {periodo}'
+        ws['A1'] = f'{curso} {periodo}'
         ws['A2'] = 'Horário (dia + turno + horário concatenados)'
         ws['B2'] = 'Código + Nome da Disciplina + Carga Horária + Professor'
 

@@ -1,13 +1,13 @@
-Dia,Turno,Horário,Curso,PPC,Período,Código,Disciplina,CH,Professor
-Segunda,M,1,CCO,0,7,CIC271,Processamento Digital de Imagens,4,Prof 7
-Segunda,M,2,CCO,0,7,CIC271,Processamento Digital de Imagens,4,Prof 7
-Segunda,M,3,CCO,0,7,CIC271,Processamento Digital de Imagens,4,Prof 7
-Segunda,M,4,CCO,0,7,CIC271,Processamento Digital de Imagens,4,Prof 7
-Segunda,N,1,SIN,0,5,SIN260,Sistemas Inteligentes,4,Prof 7
-Segunda,N,2,SIN,0,5,SIN260,Sistemas Inteligentes,4,Prof 7
-Segunda,N,3,SIN,0,5,SIN260,Sistemas Inteligentes,4,Prof 7
-Segunda,N,4,SIN,0,5,SIN260,Sistemas Inteligentes,4,Prof 7
-Terça,M,1,Optativas,0,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
-Terça,M,2,Optativas,0,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
-Terça,M,3,Optativas,0,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
-Terça,M,4,Optativas,0,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
+Dia,Turno,Horário,Curso,Período,Código,Disciplina,CH,Professor
+Terça,M,1,CCO,7,CIC271,Processamento Digital de Imagens,4,Prof 7
+Terça,M,2,CCO,7,CIC271,Processamento Digital de Imagens,4,Prof 7
+Terça,M,3,CCO,7,CIC271,Processamento Digital de Imagens,4,Prof 7
+Terça,M,4,CCO,7,CIC271,Processamento Digital de Imagens,4,Prof 7
+Quinta,N,3,SIN,5,SIN260,Sistemas Inteligentes,4,Prof 7
+Quinta,N,4,SIN,5,SIN260,Sistemas Inteligentes,4,Prof 7
+Quinta,N,1,SIN,5,SIN260,Sistemas Inteligentes,4,Prof 7
+Quinta,N,2,SIN,5,SIN260,Sistemas Inteligentes,4,Prof 7
+Sexta,M,3,Optativas,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
+Sexta,M,4,Optativas,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
+Sexta,M,1,Optativas,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7
+Sexta,M,2,Optativas,3,OPT4,Tópicos em Ciência de Dados,4,Prof 7

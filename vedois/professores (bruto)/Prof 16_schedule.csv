@@ -1,11 +1,11 @@
-Dia,Turno,Horário,Curso,PPC,Período,Código,Disciplina,CH,Professor
-Terça,M,1,CCO,2022,1,CAHC04,Projeto Integrado,2,Prof 16
-Terça,M,2,CCO,2022,1,CAHC04,Projeto Integrado,2,Prof 16
-Terça,N,1,CCO,2022,3,CMAC03,Algoritmos em Grafos,4,Prof 16
-Terça,N,2,CCO,2022,3,CMAC03,Algoritmos em Grafos,4,Prof 16
-Terça,N,3,CCO,2022,3,CMAC03,Algoritmos em Grafos,4,Prof 16
-Terça,N,4,CCO,2022,3,CMAC03,Algoritmos em Grafos,4,Prof 16
-Terça,T,1,CCO,0,7,COM242,Sistemas Distribuídos,4,Prof 16
-Terça,T,2,CCO,0,7,COM242,Sistemas Distribuídos,4,Prof 16
-Terça,T,3,CCO,0,7,COM242,Sistemas Distribuídos,4,Prof 16
-Terça,T,4,CCO,0,7,COM242,Sistemas Distribuídos,4,Prof 16
+Dia,Turno,Horário,Curso,Período,Código,Disciplina,CH,Professor
+Segunda,T,1,CCO,3,CMAC03,Algoritmos em Grafos,4,Prof 16
+Segunda,T,2,CCO,3,CMAC03,Algoritmos em Grafos,4,Prof 16
+Segunda,T,3,CCO,3,CMAC03,Algoritmos em Grafos,4,Prof 16
+Segunda,T,4,CCO,3,CMAC03,Algoritmos em Grafos,4,Prof 16
+Sexta,M,1,CCO,7,COM242,Sistemas Distribuídos,4,Prof 16
+Sexta,M,2,CCO,7,COM242,Sistemas Distribuídos,4,Prof 16
+Sexta,M,3,CCO,7,COM242,Sistemas Distribuídos,4,Prof 16
+Sexta,M,4,CCO,7,COM242,Sistemas Distribuídos,4,Prof 16
+Quinta,M,3,CCO,1,CAHC04,Projeto Integrado,2,Prof 16
+Quinta,M,4,CCO,1,CAHC04,Projeto Integrado,2,Prof 16

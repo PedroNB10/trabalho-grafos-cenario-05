@@ -1,11 +1,11 @@
-Dia,Turno,Horário,Curso,PPC,Período,Código,Disciplina,CH,Professor
-Terça,N,3,CCO,0,5,COM311,Análise de Investimento em Informática,3,Prof 2
-Terça,N,4,CCO,0,5,COM311,Análise de Investimento em Informática,3,Prof 2
-Segunda,T,5,CCO,0,5,COM311,Análise de Investimento em Informática,3,Prof 2
-Terça,T,3,SIN,2017,7,SIN313,Organização e Métodos,3,Prof 2
-Terça,T,4,SIN,2017,7,SIN313,Organização e Métodos,3,Prof 2
-Segunda,M,5,SIN,2017,7,SIN313,Organização e Métodos,3,Prof 2
-Segunda,M,1,Optativas,0,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
-Segunda,M,2,Optativas,0,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
-Segunda,M,3,Optativas,0,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
-Segunda,M,4,Optativas,0,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
+Dia,Turno,Horário,Curso,Período,Código,Disciplina,CH,Professor
+Quinta,T,1,CCO,5,COM311,Análise de Investimento em Informática,3,Prof 2
+Quinta,T,2,CCO,5,COM311,Análise de Investimento em Informática,3,Prof 2
+Segunda,M,5,CCO,5,COM311,Análise de Investimento em Informática,3,Prof 2
+Quarta,N,1,SIN,7,SIN313,Organização e Métodos,3,Prof 2
+Quarta,N,2,SIN,7,SIN313,Organização e Métodos,3,Prof 2
+Terça,N,5,SIN,7,SIN313,Organização e Métodos,3,Prof 2
+Quinta,M,3,Optativas,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
+Quinta,M,4,Optativas,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
+Quinta,M,1,Optativas,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
+Quinta,M,2,Optativas,3,OPT1,Metaheurísticas para Problemas de Otimização,4,Prof 2
