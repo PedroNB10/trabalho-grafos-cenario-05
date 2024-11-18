@@ -5,7 +5,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from collections import defaultdict
 from openpyxl import Workbook
-from openpyxl.styles import Alignment, PatternFill
+from openpyxl.styles import Alignment, PatternFill, Font, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 import random
 
@@ -17,6 +17,7 @@ os.makedirs('dataset', exist_ok=True)
 os.makedirs('controle', exist_ok=True)
 os.makedirs('professores (bruto)', exist_ok=True)
 os.makedirs('professores (importar)', exist_ok=True)
+os.makedirs('alunos (importar)', exist_ok=True)
 os.makedirs('grafos', exist_ok=True) 
 
 # Ler arquivo da pasta dataset
@@ -135,35 +136,59 @@ def check_conflicts(schedule, new_allocation):
     
     return False
 
-def dsatur_coloring(graph):
-    colors = {}
-    vertices = sorted(graph.nodes(), key=lambda x: graph.degree(x), reverse=True)
-    colors[vertices[0]] = 0
+def get_saturation_degree(vertex, graph, colored_vertices):
+    """Calcula o grau de saturação de um vértice."""
+    # Conjunto de cores diferentes usadas pelos vizinhos
+    neighbor_colors = set()
+    for neighbor in graph.neighbors(vertex):
+        if neighbor in colored_vertices:
+            neighbor_colors.add(colored_vertices[neighbor])
+    return len(neighbor_colors)
+
+def get_max_saturation_vertex(graph, colored_vertices, uncolored_vertices):
+    """Retorna o vértice não colorido com maior grau de saturação."""
+    max_saturation = -1
+    max_degree = -1
+    selected_vertex = None
     
-    def get_saturation(vertex):
-        neighbor_colors = set()
-        for neighbor in graph[vertex]:
-            if neighbor in colors:
-                neighbor_colors.add(colors[neighbor])
-        return len(neighbor_colors)
-    
-    for _ in range(1, len(vertices)):
-        max_sat = -1
-        max_vertex = None
-        for vertex in vertices:
-            if vertex not in colors:
-                sat = get_saturation(vertex)
-                if sat > max_sat:
-                    max_sat = sat
-                    max_vertex = vertex
+    for vertex in uncolored_vertices:
+        saturation = get_saturation_degree(vertex, graph, colored_vertices)
+        degree = graph.degree(vertex)
         
-        used_colors = set(colors[neighbor] for neighbor in graph[max_vertex] if neighbor in colors)
+        # Se encontrarmos uma saturação maior ou igual com maior grau
+        if (saturation > max_saturation) or \
+           (saturation == max_saturation and degree > max_degree):
+            max_saturation = saturation
+            max_degree = degree
+            selected_vertex = vertex
+            
+    return selected_vertex
+
+def dsatur_coloring(graph):
+    """Implementa o algoritmo DSATUR para coloração do grafo."""
+    colored_vertices = {}  # Dicionário para armazenar as cores dos vértices
+    uncolored_vertices = set(graph.nodes())  # Conjunto de vértices não coloridos
+    
+    # Enquanto houver vértices não coloridos
+    while uncolored_vertices:
+        # Seleciona o vértice com maior grau de saturação
+        vertex = get_max_saturation_vertex(graph, colored_vertices, uncolored_vertices)
+        
+        # Encontra a menor cor disponível
+        used_colors = set(colored_vertices[neighbor] 
+                         for neighbor in graph.neighbors(vertex) 
+                         if neighbor in colored_vertices)
+        
+        # Encontra a primeira cor não utilizada pelos vizinhos
         color = 0
         while color in used_colors:
             color += 1
-        colors[max_vertex] = color
+            
+        # Atribui a cor ao vértice
+        colored_vertices[vertex] = color
+        uncolored_vertices.remove(vertex)
     
-    return colors
+    return colored_vertices
 
 def generate_schedules():
     MAX_ATTEMPTS = 1000  # Número máximo de tentativas para alocar uma disciplina
@@ -485,48 +510,6 @@ professores = df.groupby("Professor")
 red_fill = PatternFill(start_color="FF9999", end_color="FF9999", fill_type="solid")
 green_fill = PatternFill(start_color="99FF99", end_color="99FF99", fill_type="solid")
 
-# Gerar um arquivo para cada professor
-for professor, dados in professores:
-    wb = Workbook()
-    ws = wb.active
-    ws.title = professor
-
-    # Adicionar título com nome do professor
-    row = 1
-    ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=3)
-    ws.cell(row=row, column=1).value = professor
-    ws.cell(row=row, column=1).alignment = Alignment(horizontal="center", vertical="center")
-    row += 1
-
-    # Adicionar cabeçalho
-    ws.cell(row=row, column=1).value = "Dia da Semana"
-    ws.cell(row=row, column=2).value = "Horário"
-    ws.cell(row=row, column=3).value = "Disciplina"
-    ws.row_dimensions[row].height = 20
-    row += 1
-
-    # Preencher os dados
-    for _, linha in dados.iterrows():
-        ws.cell(row=row, column=1).value = linha["Dia"]
-        ws.cell(row=row, column=2).value = linha["Turno_Horário"]
-        ws.cell(row=row, column=3).value = linha["Disciplina"]
-
-        # Aplicar cor de fundo
-        if linha["Disciplina"].lower() != "livre":
-            ws.cell(row=row, column=3).fill = red_fill
-        else:
-            ws.cell(row=row, column=3).fill = green_fill
-
-        row += 1
-
-    # Ajustar largura das colunas
-    for col in range(1, 4):
-        ws.column_dimensions[get_column_letter(col)].width = 25  # Aproximadamente 250 pixels
-
-    # Salvar o arquivo para o professor na pasta especificada
-    nome_arquivo = os.path.join("professores (importar)", f"{professor}_horarios.xlsx")
-    wb.save(nome_arquivo)
-
 print("Planilhas de professores geradas com sucesso!")
 
 # GERA ARQUIVOS IMPORTÁVEIS PARA SPREADSHEET OU EXCEL (ALUNOS)
@@ -540,68 +523,162 @@ def get_horario(dia, turno, horario):
     else:
         return "Desconhecido"
 
-# Função para ler o arquivo CSV e gerar as planilhas
-def gerar_planilhas():
-    # Caminho do arquivo CSV
-    caminho_csv = os.path.join('controle', 'horario_global.csv')
-
-    # Ler o arquivo CSV
-    df = pd.read_csv(caminho_csv)
-
-    # Criar pasta "alunos (importar)" se não existir
-    os.makedirs('alunos (importar)', exist_ok=True)
-
-    # Agrupar por Curso e Período
-    grupos = df.groupby(['Curso', 'Período'])
-
-    for (curso, periodo), grupo in grupos:
-        # Criar uma nova planilha
-        wb = Workbook()
-        ws = wb.active
-        ws.title = f'{curso}_{periodo}'
-
-        # Adicionar cabeçalho
-        ws['A1'] = f'{curso} {periodo}'
-        ws['A2'] = 'Horário (dia + turno + horário concatenados)'
-        ws['B2'] = 'Código + Nome da Disciplina + Carga Horária + Professor'
-
-        # Definir a largura das colunas
-        ws.column_dimensions['A'].width = 35
-        ws.column_dimensions['B'].width = 100
-
-        # Estilo para as células
-        for cell in ws["1:2"]:
-            for c in cell:
-                c.alignment = Alignment(horizontal="center", vertical="center")
-
-        # Preencher as células com os dados
-        row_idx = 3
-        for _, row in grupo.iterrows():
-            dia = row['Dia']
-            turno = row['Turno']
-            horario = row['Horário']
-            codigo = row['Código']
-            disciplina = row['Disciplina']
-            carga_horaria = row['CH']
-            professor = row['Professor']
-
-            # Adicionar o horário formatado
-            horario_formatado = get_horario(dia, turno, horario)
-
-            # Concatenar a descrição do código + nome da disciplina + carga horária + professor
-            descricao = f"{codigo} {disciplina} {carga_horaria} {professor}"
-
-            # Adicionar os dados na planilha
-            ws[f'A{row_idx}'] = horario_formatado
-            ws[f'B{row_idx}'] = descricao
-
-            row_idx += 1
-
-        # Salvar a planilha
-        nome_arquivo = f"alunos (importar)/{curso}_{periodo}.xlsx"
-        wb.save(nome_arquivo)
-
-# Chamar a função para gerar as planilhas
-gerar_planilhas()
-
 print("Planilhas de alunos geradas com sucesso!")
+
+def format_cell(cell, bg_color=None, font_color="000000", bold=False, merge_cells=None, alignment=None):
+    """Helper function to format cells"""
+    if bg_color:
+        cell.fill = PatternFill(start_color=bg_color, end_color=bg_color, fill_type="solid")
+    cell.font = Font(color=font_color, bold=bold)
+    if alignment:
+        cell.alignment = alignment
+    if merge_cells:
+        worksheet = cell.parent
+        worksheet.merge_cells(merge_cells)
+
+def create_schedule_workbook(data, is_professor=False):
+    wb = Workbook()
+    ws = wb.active
+
+    # Define styles
+    center_alignment = Alignment(horizontal='center', vertical='center', wrap_text=True)
+    border = Border(
+        left=Side(style='thin'),
+        right=Side(style='thin'),
+        top=Side(style='thin'),
+        bottom=Side(style='thin')
+    )
+
+    # Headers setup
+    if is_professor:
+        # Professor header
+        prof_name = data['Professor'].iloc[0]
+        cell = ws.cell(row=1, column=1, value=prof_name)
+        format_cell(cell, 
+                   bg_color="000000", 
+                   font_color="FFFFFF", 
+                   bold=True, 
+                   merge_cells=f'A1:F1',
+                   alignment=center_alignment)
+    else:
+        # Course header
+        course = f"{data['Curso'].iloc[0]} / {data['Período'].iloc[0]}º Período"
+        cell = ws.cell(row=1, column=1, value=course)
+        format_cell(cell, 
+                   bg_color="000000", 
+                   font_color="FFFFFF", 
+                   bold=True, 
+                   merge_cells=f'A1:F1',
+                   alignment=center_alignment)
+
+    # Day headers
+    days = ['Horário', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira']
+    for col, day in enumerate(days, 1):
+        cell = ws.cell(row=2, column=col, value=day)
+        format_cell(cell, bold=True, alignment=center_alignment)
+        cell.border = border
+
+    # Time slots
+    time_slots = {
+        'M': ['07:00 - 07:55', '07:55 - 08:50', '08:50 - 09:45', '10:10 - 11:00', '11:00 - 11:55'],
+        'T': ['13:30 - 14:25', '14:25 - 15:20', '15:45 - 16:40', '16:40 - 17:35', '17:35 - 18:30'],
+        'N': ['19:00 - 19:50', '19:50 - 20:40', '21:00 - 21:50', '21:50 - 22:40', '22:40 - 23:30']
+    }
+
+    current_row = 3
+    for turn in ['M', 'T', 'N']:
+        for idx, time in enumerate(time_slots[turn]):
+            # Time column
+            cell = ws.cell(row=current_row, column=1, value=time)
+            format_cell(cell, alignment=center_alignment)
+            cell.border = border
+
+            # Initialize empty cells for each day
+            for day_col in range(2, 7):
+                cell = ws.cell(row=current_row, column=day_col, value="")
+                cell.border = border
+
+            current_row += 1
+
+    # Fill in the schedule
+    colors = {
+        'XMAC': 'CC99FF',  # Purple
+        'XDES': 'CCCCCC',  # Gray
+        'MAT': 'FFFF99',   # Yellow
+        'CRSC': '99CCFF',  # Light Blue
+        'IEPG': 'FF99CC',  # Pink
+        'SAHC': 'FF99FF',  # Light Purple
+        'CAHC': 'FF0000',  # Red
+    }
+
+    # Process each class
+    for _, row in data.iterrows():
+        day_map = {
+            'Segunda': 2,
+            'Terça': 3,
+            'Quarta': 4,
+            'Quinta': 5,
+            'Sexta': 6
+        }
+        
+        time_map = {
+            ('M', 1): 3,
+            ('M', 2): 4,
+            ('M', 3): 5,
+            ('M', 4): 6,
+            ('M', 5): 7,
+            ('T', 1): 8,
+            ('T', 2): 9,
+            ('T', 3): 10,
+            ('T', 4): 11,
+            ('T', 5): 12,
+            ('N', 1): 13,
+            ('N', 2): 14,
+            ('N', 3): 15,
+            ('N', 4): 16,
+            ('N', 5): 17
+        }
+
+        day_col = day_map.get(row['Dia'])
+        time_row = time_map.get((row['Turno'], row['Horário']))
+
+        if day_col and time_row:
+            # Determine cell color based on course code
+            color_key = next((k for k in colors.keys() if row['Código'].startswith(k)), 'FFFFFF')
+            bg_color = colors.get(color_key, 'FFFFFF')
+
+            # Format cell content
+            if is_professor:
+                content = f"{row['Curso']} {row['Período']}º\n{row['Código']}\n{row['Disciplina']}"
+            else:
+                content = f"{row['Código']}\n{row['Disciplina']}"
+
+            cell = ws.cell(row=time_row, column=day_col, value=content)
+            format_cell(cell, bg_color=bg_color, alignment=center_alignment)
+            cell.border = border
+
+    # Adjust column widths
+    for col in range(1, 7):
+        ws.column_dimensions[get_column_letter(col)].width = 20
+
+    return wb
+
+def generate_new_schedules(global_schedule_path):
+    # Read the global schedule
+    df = pd.read_csv(global_schedule_path)
+    
+    # Generate professor schedules
+    for prof in df['Professor'].unique():
+        prof_data = df[df['Professor'] == prof]
+        wb = create_schedule_workbook(prof_data, is_professor=True)
+        wb.save(f'professores (importar)/{prof}_horarios.xlsx')
+
+    # Generate course schedules
+    for (curso, periodo), group_data in df.groupby(['Curso', 'Período']):
+        wb = create_schedule_workbook(group_data, is_professor=False)
+        wb.save(f'alunos (importar)/{curso}_{periodo}.xlsx')
+
+    print("Novas planilhas geradas com sucesso!")
+
+# Call the function
+generate_new_schedules('controle/horario_global.csv')
