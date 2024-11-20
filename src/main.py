@@ -142,8 +142,28 @@ def criarGrafoTurmas(nos: list) -> dict:
 
     return grafoTurmas 
 
+def criarGrafoProfessores(nos: list) -> dict:
 
-def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
+    grafoProf = {}
+
+    for i in range(len(nos)):
+        arestas = set()
+
+        for j in range(len(nos)):
+
+            if i == j:
+                continue
+            
+            for p in nos[i].professores:
+                if p in nos[j].professores:
+                    arestas.add(j)
+        
+        grafoProf [i] = arestas
+
+    return grafoProf
+
+
+def fazerDivisaoHorario(nos: list[Disciplina]):
     # Define uma semente fixa para os números aleatórios
     random.seed(42)
 
@@ -164,8 +184,18 @@ def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
     # Vamos usar o metodo shuffle para aleatoriezar um pouco a sequencia de horarios, evitando 5 horarios seguidos da mesma disciplina
     random.shuffle(ch3)
     random.shuffle(ch2)
+
+    # Terceiro passo: Precisaremos checar se os professores estão trabalhando 6 horas ou menos por dia. Por isso, uma lista de horas trabalhadas por dia por professor pode ser util
+    listaCHProfessor = []
+    for i in range(18):
+        listaCHProfessor.append({0: 0, # Seg
+                                 1: 0, # Ter
+                                 2: 0, # Qua
+                                 3: 0, # Qui
+                                 4: 0}) # Sex
+
     
-    # Terceiro passo: Se separar uma cor para cada horario, podemos simplesmente conectar as disciplinas a suas respectivas cores
+    # Quarto passo: Se separar uma cor para cada horario, podemos simplesmente conectar as disciplinas a suas respectivas cores
     for i in range(len(ch3)):
 
         # Uma condição de loop é estabelecida para captar erros onde um horario não foi encontrado
@@ -245,6 +275,15 @@ def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
                 # se ja tiver achado a cor, quebra o loop
                 if sucesso:
                     break
+                    # disciplinas = getDisciplinasPorCor()
+                    # for no in disciplinas:
+                    #     if not checkProfessores(no, dia):
+                    #         sucesso = False
+                    #         break
+                    # if sucesso:
+                    #     for no in disciplinas:
+                    #         aumentarCargaHorariaProfessor(no, dia)
+                    #     break
 
             # se nao tiver achado o numero, coloca no primeiro None que achar
             if not sucesso:
@@ -301,9 +340,63 @@ def fazerDivisaoHorario(nos: list[Disciplina], grafoColorido: dict):
                 
                 
                 
+    def checkHorasProfessor():
+        problemas = []
 
+        for prof in range(18):
+            for dia, ch in listaCHProfessor[prof].items():
+                if ch > 6:
+                    problemas.append((prof, dia, ch))
         
+        return problemas
+    
+    def updateHorasProfessor():
+        for i in range(len(nos)):
+
+            for dia in range(5):
+                if nos[i].cor in list(horarios[dia].values()):
+                    for prof in nos[i].professores:
+                        listaCHProfessor[prof-1][dia] += nos[i].ch
+
+    # def trySwitchingColors():
+    #     for info in conflitos:
+    #         dia = info[1]
+
+    #         cor = 
+
+    
+    updateHorasProfessor()
+    conflitos = checkHorasProfessor()
+    print(conflitos)
+
+    # if conflitos != []:
+    #     # trySwitchingColors()
+    #     updateHorasProfessor()
+    #     conflitos = checkHorasProfessor()
+
+
+    # def checkProfessores(no: Disciplina, dia: int):
+    #     profs = no.professores
+    #     for prof in no:
+    #         if listaCHProfessor[prof][dia] + no.ch > 6:
+    #             return False
+        
+    #     return True
+    
+    # def getDisciplinasPorCor(cor: int):
+    #     return [no for no in nos if no.cor == cor]
+    
+    # def aumentarCargaHorariaProfessor(no: Disciplina, dia: int):
+    #     profs = no.professores
+    #     for prof in no:
+    #         listaCHProfessor[prof][dia] += no.ch
+
+
+
+
     return horarios
+
+    
 
 def exibirHorariosPorTurma(horarios, nos):
     dias = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta"]
@@ -336,12 +429,83 @@ def exibirHorariosPorTurma(horarios, nos):
 
 # Exibe os horários organizados por turma
 
+def colorirGrafoDSatur(nos: list, listaAdjacencia: dict) -> int:
+    # Inicialização
+    cores_usadas = set()
+    grau_saturacao = [0] * len(nos)
+    cores_nos = [None] * len(nos)
+    nao_coloridos = set(range(len(nos)))
+
+    while nao_coloridos:
+        # Seleciona o nó com maior grau de saturação
+        # Em caso de empate, escolhe o de maior grau (número de vizinhos)
+        max_saturacao = -1
+        candidatos = []
+        for i in nao_coloridos:
+            sat = len(set(cores_nos[vizinho] for vizinho in listaAdjacencia[i] if cores_nos[vizinho] is not None))
+            if sat > max_saturacao:
+                max_saturacao = sat
+                candidatos = [i]
+            elif sat == max_saturacao:
+                candidatos.append(i)
+        # Seleciona o nó com maior grau entre os candidatos
+        grau_max = -1
+        for i in candidatos:
+            grau = len(listaAdjacencia[i])
+            if grau > grau_max:
+                grau_max = grau
+                no_escolhido = i
+        # Atribui a menor cor possível
+        cores_vizinhos = set(cores_nos[vizinho] for vizinho in listaAdjacencia[no_escolhido] if cores_nos[vizinho] is not None)
+        cor = 0
+        while cor in cores_vizinhos:
+            cor += 1
+        cores_nos[no_escolhido] = cor
+        cores_usadas.add(cor)
+        nao_coloridos.remove(no_escolhido)
+        # Atualiza o grau de saturação dos vizinhos
+        for vizinho in listaAdjacencia[no_escolhido]:
+            if cores_nos[vizinho] is None:
+                grau_saturacao[vizinho] += 1
+    # Atribui as cores aos nós
+    for i in range(len(nos)):
+        nos[i].cor = cores_nos[i]
+    return len(cores_usadas)
+
+        
+def criarCsvHorariosPorTurma(nos: list, grafoTurmas: dict):
+    dados = []
+    campos = ["Turma", "Nome_Disciplina", "CH", "Professor", "Horario"]  # Define as colunas
+
+    indice = 0
+    while indice < len(nos):
+        no : Disciplina = nos[indice]
+
+        dicionario = {campos[0]: no.turma, campos[1]: no.nome, campos[2]: no.ch, campos[3]: no.professores, campos[4]: no.horario}
+
+        dados.append(dicionario)
+
+        for disciplina in grafoTurmas:
+            no : Disciplina = nos[disciplina]
+
+            dicionario = {campos[0]: no.turma, campos[1]: no.nome, campos[2]: no.ch, campos[3]: no.professores, campos[4]: no.horario}
+        
+            dados.append(dicionario)
+        
+        indice = disciplina + 1
+
+    # Criando o arquivo e escrevendo os dados
+    nome_arquivo = "teste.csv"
+    with open(nome_arquivo, mode="w", newline="", encoding="utf-8") as arquivo:
+        escritor = csv.DictWriter(arquivo, fieldnames=campos)
+        escritor.writeheader()  # Escreve o cabeçalho
+        escritor.writerows(dados)  # Escreve os dados
 
         
 
 if __name__ == "__main__":
     # Constrói o caminho para o arquivo CSV de forma compatível com qualquer sistema operacional
-    caminho_csv = os.path.join("..", "datasets", "csv", "semestre1.csv")
+    caminho_csv = os.path.join("..", "datasets", "csv", "semestre2.csv")
 
     # Chama a função com o caminho ajustado
     nos = carregarDisciplinasCsv(caminho_csv)
@@ -353,14 +517,18 @@ if __name__ == "__main__":
     print(f'Quantidade de cores: {colorirGrafo(nos, arestas)}')
 
     grafoPorTurmas = criarGrafoTurmas(nos)
+    grafoPorProfessores = criarGrafoProfessores(nos)
     # print(grafoPorTurmas)
 
-    horarios = fazerDivisaoHorario(nos, arestas)
+    horarios = fazerDivisaoHorario(nos)
 
     # print(horarios)
 
     # Exibe os horários formatados
-    exibirHorariosPorTurma(horarios, nos)
+    # exibirHorariosPorTurma(horarios, nos)
+
+    # imprimirHorariosPorTurma(nos, grafoPorTurmas)
+
 
 
 

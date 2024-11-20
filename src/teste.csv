@@ -1,0 +1,86 @@
+Turma,Nome_Disciplina,CH,Professor,Horario
+CCO-2022.2,Fundamentos de Programação,2,[12],M12
+CCO-2022.2,Fundamentos de Programação,2,[12],M12
+CCO-2022.2,Fundamentos de Programação,2,[12],T12
+CCO-2022.2,Programação Lógica e Funcional,2,[7],M12
+CCO-2022.2,Programação Lógica e Funcional,2,[7],T12
+CCO-2022.2,Arquitetura de Computadores II,2,[13],T34
+CCO-2022.2,Arquitetura de Computadores II,2,[13],M45
+CCO-2022.2,Algoritmos e Estruturas de Dados I,2,"[6, 15]",M45
+CCO-2022.2,Algoritmos e Estruturas de Dados I,2,"[6, 15]",T12
+CCO-2022.2,Modelagem Computacional,2,[5],M12
+CCO-2022.2,Modelagem Computacional,2,[5],T34
+CCO-2013.2,Organização e Arquitetura de Computadores I,2,[13],M12
+CCO-2013.2,Organização e Arquitetura de Computadores I,2,[13],T12
+CCO-2013.2,Economia da Informação,3,[2],M123
+CCO-2013.4,Análise e Projeto de Algoritmos I,2,[14],M12
+CCO-2013.4,Análise e Projeto de Algoritmos I,2,[14],T12
+CCO-2013.4,Sistemas Operacionais,3,[11],M123
+CCO-2013.4,Sistemas Operacionais,2,[11],T12
+CCO-2013.4,Engenharia de Software I,3,[8],T345
+CCO-2013.4,Engenharia de Software I,2,[8],M45
+CCO-2013.4,Computação Orientada a Objetos I,2,[9],M45
+CCO-2013.4,Computação Orientada a Objetos I,2,[9],T12
+CCO-2013.6,Paradigmas de Programação,2,[7],M12
+CCO-2013.6,Paradigmas de Programação,2,[7],T12
+CCO-2013.6,Compiladores,2,[5],M12
+CCO-2013.6,Compiladores,2,[5],T12
+CCO-2013.6,Inteligência Artificial,2,[3],T34
+CCO-2013.6,Inteligência Artificial,2,[3],M45
+CCO-2013.6,Computação Gráfica,3,[6],M123
+CCO-2013.6,Banco de Dados II,2,[18],M45
+CCO-2013.6,Banco de Dados II,2,[18],T12
+CCO-2013.6,Adm. e Gerência de Redes de Computadores,3,[4],T345
+CCO-2013.6,Informática e Sociedade,3,[2],T345
+SIN-2022.2,Programação Orientada a Objetos,2,[9],N34
+SIN-2022.2,Programação Orientada a Objetos,2,[9],N34
+SIN-2022.2,Engenharia de Software I,2,[8],N34
+SIN-2022.2,Engenharia de Software I,2,[8],N12
+SIN-2022.2,Algoritmos e Programação I,2,[14],N12
+SIN-2022.2,Algoritmos e Programação I,2,[14],N12
+SIN-2022.2,Matemática Discreta,2,[5],N34
+SIN-2022.2,Matemática Discreta,2,[5],N12
+SIN-2017.2,Comportamento Organizacional,3,[2],N345
+SIN-2017.2,Organização e Arquitetura de Computadores,2,[11],N34
+SIN-2017.2,Organização e Arquitetura de Computadores,2,[11],N34
+SIN-2017.4,Computação Orientada a Objetos II,2,[15],N34
+SIN-2017.4,Computação Orientada a Objetos II,2,[15],N34
+SIN-2017.4,Sistemas Operacionais,3,[13],N345
+SIN-2017.4,Sistemas Operacionais,2,[13],N12
+SIN-2017.4,Engenharia de Software II,2,[10],N12
+SIN-2017.4,Engenharia de Software II,2,[10],N12
+SIN-2017.4,Banco de Dados I,2,[12],N34
+SIN-2017.4,Banco de Dados I,2,[12],N12
+SIN-2017.4,Algoritmos e Grafos,3,[16],N345
+SIN-2017.6,Informática e Sociedade,3,[2],N345
+SIN-2017.6,Engenharia de Projeto de Software,2,[1],N34
+SIN-2017.6,Engenharia de Projeto de Software,2,[1],N34
+SIN-2017.6,Adm. e Gerência de Redes de Computadores,3,[4],N345
+SIN-2017.6,Sistemas Distribuídos,2,[16],N12
+SIN-2017.6,Sistemas Distribuídos,2,[16],N12
+SIN-2017.6,Desenvolvimento de Sistemas na Web,3,[9],N345
+SIN-2017.6,Desenvolvimento de Sistemas na Web,2,[9],N12
+Outros Cursos-0.2,Fundamentos de Programação (EPR/EHD),2,[15],M12
+Outros Cursos-0.2,Fundamentos de Programação (EPR/EHD),2,[15],T12
+Outros Cursos-0.2,Fundamentos de Programação (ECI/EAM),2,[8],M12
+Outros Cursos-0.2,Fundamentos de Programação (ECI/EAM),2,[8],T12
+Outros Cursos-0.2,Fundamentos de Programação (FBA),2,[3],M45
+Outros Cursos-0.2,Fundamentos de Programação (FBA),2,[3],T12
+Optativas-0.4,Tópicos Especiais em Engenharia de Software (PEGA),2,[4],M12
+Optativas-0.4,Tópicos Especiais em Engenharia de Software (PEGA),2,[4],T12
+Optativas-0.4,Desenvolvimento de Jogos,2,"[6, 15]",M12
+Optativas-0.4,Desenvolvimento de Jogos,2,"[6, 15]",T12
+Optativas-0.6,Maratona de Programação I,3,[11],M123
+Optativas-0.6,Tópicos Especiais em Programação (Programação Paralela),2,"[5, 13]",M45
+Optativas-0.6,Tópicos Especiais em Programação (Programação Paralela),2,"[5, 13]",T12
+Optativas-0.4,Data Mining Aplicado,2,[18],T34
+Optativas-0.4,Data Mining Aplicado,2,[18],M45
+Pós Graduação-0.4,Arquitetura de Software (Opt+Pós),2,[10],M12
+Pós Graduação-0.4,Arquitetura de Software (Opt+Pós),2,[10],T12
+Pós Graduação-0.4,Visualização de Informação (Opt+Pós),2,[12],M12
+Pós Graduação-0.4,Visualização de Informação (Opt+Pós),2,[12],T12
+Pós Graduação-0.6,Simuladores (Pós),2,[3],M12
+Pós Graduação-0.6,Simuladores (Pós),2,[3],T12
+Pós Graduação-0.4,Sistemas Operacionais (Pós),2,[4],T34
+Pós Graduação-0.6,Tópicos em Engenharia de Software (Pós),2,[17],M12
+Pós Graduação-0.6,Tópicos em Engenharia de Software (Pós),2,[17],T12
