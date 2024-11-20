@@ -1,0 +1,9 @@
+Curso,Período,Código da Disciplina,Nome da Disciplina,Dia da Semana,Professor,Horário
+CCO,5,COM211,Engenharia de Software II,1,11,M45
+CCO,5,COM211,Engenharia de Software II,3,11,T345
+SIN,3,SRSC03,Organização e Arquitetura de Computadores,2,11,N345
+SIN,3,SRSC03,Organização e Arquitetura de Computadores,5,11,N345
+Outros Cursos,1,CCO016,Fundamentos de Programação (MBA),3,11,M45
+Outros Cursos,1,CCO016,Fundamentos de Programação (MBA),1,11,T12
+Optativas,5,OPT3,Cloud Computing,2,11,T345
+Optativas,5,OPT3,Cloud Computing,2,11,T12

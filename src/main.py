@@ -291,7 +291,48 @@ def criarListaAdjacencia(nos: list[Disciplina]) -> dict[int, set[int]]:
 
     return listaAdjacencia
 
+def colorirGrafoDSatur(nos: list, listaAdjacencia: dict) -> int:
+    # Inicialização
+    cores_usadas = set()
+    grau_saturacao = [0] * len(nos)
+    cores_nos = [None] * len(nos)
+    nao_coloridos = set(range(len(nos)))
 
+    while nao_coloridos:
+        # Seleciona o nó com maior grau de saturação
+        # Em caso de empate, escolhe o de maior grau (número de vizinhos)
+        max_saturacao = -1
+        candidatos = []
+        for i in nao_coloridos:
+            sat = len(set(cores_nos[vizinho] for vizinho in listaAdjacencia[i] if cores_nos[vizinho] is not None))
+            if sat > max_saturacao:
+                max_saturacao = sat
+                candidatos = [i]
+            elif sat == max_saturacao:
+                candidatos.append(i)
+        # Seleciona o nó com maior grau entre os candidatos
+        grau_max = -1
+        for i in candidatos:
+            grau = len(listaAdjacencia[i])
+            if grau > grau_max:
+                grau_max = grau
+                no_escolhido = i
+        # Atribui a menor cor possível
+        cores_vizinhos = set(cores_nos[vizinho] for vizinho in listaAdjacencia[no_escolhido] if cores_nos[vizinho] is not None)
+        cor = 0
+        while cor in cores_vizinhos:
+            cor += 1
+        cores_nos[no_escolhido] = cor
+        cores_usadas.add(cor)
+        nao_coloridos.remove(no_escolhido)
+        # Atualiza o grau de saturação dos vizinhos
+        for vizinho in listaAdjacencia[no_escolhido]:
+            if cores_nos[vizinho] is None:
+                grau_saturacao[vizinho] += 1
+    # Atribui as cores aos nós
+    for i in range(len(nos)):
+        nos[i].cor = cores_nos[i]
+    return len(cores_usadas)
 
 def colorirGrafo(nos: list, listaAdjacencia: dict) -> int:
     # Número de cores usadas até agora
