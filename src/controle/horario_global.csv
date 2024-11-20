@@ -1,0 +1,103 @@
+Curso,Período,Código da Disciplina,Nome da Disciplina,Dia da Semana,Professores,Horário
+CCO,1,XDES01,Fundamentos de Programação,2,12,T345
+CCO,1,XDES01,Fundamentos de Programação,2,12,T12
+CCO,1,CRSC03,Arquitetura de Computadores I,1,13,M45
+CCO,1,CRSC03,Arquitetura de Computadores I,3,13,T345
+CCO,1,XMAC01,Matemática Discreta,3,5,T12
+CCO,1,XMAC01,Matemática Discreta,1,5,T12
+CCO,1,CAHC04,Projeto Integrado,1,16,M123
+CCO,3,XDES02,Programação Orientada a Objetos,2,9,T345
+CCO,3,XDES02,Programação Orientada a Objetos,2,9,T12
+CCO,3,XDES04,Engenharia de Software I,1,1,M45
+CCO,3,XDES04,Engenharia de Software I,3,1,T345
+CCO,3,CRSC02,Sistemas Operacionais,3,13,T12
+CCO,3,CRSC02,Sistemas Operacionais,1,13,T12
+CCO,3,CTCO02,Algoritmos e Estrutura de Dados II,1,18,M123
+CCO,3,CTCO02,Algoritmos e Estrutura de Dados II,3,18,M123
+CCO,3,XMAC02,Métodos Matemáticos para Análise de Dados,2,9,M123
+CCO,3,XMAC02,Métodos Matemáticos para Análise de Dados,2,9,M45
+CCO,3,CMAC03,Algoritmos em Grafos,3,16,M45
+CCO,3,CMAC03,Algoritmos em Grafos,1,16,T345
+CCO,5,CIC111,Análise e Projeto de Algoritmos II,2,14,T345
+CCO,5,CIC132,Linguagens Formais e Autômatos,2,5,T12
+CCO,5,CIC132,Linguagens Formais e Autômatos,1,5,M45
+CCO,5,COM211,Engenharia de Software II,3,"8, 11",T345
+CCO,5,COM211,Engenharia de Software II,3,"8, 11",T12
+CCO,5,COM221,Computação Orientada a Objetos II,1,10,T12
+CCO,5,COM221,Computação Orientada a Objetos II,1,10,M123
+CCO,5,COM230,Banco de Dados I,3,12,M123
+CCO,5,COM230,Banco de Dados I,2,12,M123
+CCO,5,COM240,Redes de Computadores,2,4,M45
+CCO,5,COM240,Redes de Computadores,3,4,M45
+CCO,5,COM311,Análise de Investimento em Informática,1,2,T345
+CCO,7,CIC271,Processamento Digital de Imagens,2,7,T345
+CCO,7,CIC271,Processamento Digital de Imagens,2,7,T12
+CCO,7,COM212,Gerência de Projeto de Software,3,1,T12
+CCO,7,COM212,Gerência de Projeto de Software,1,1,T12
+CCO,7,COM213,Interação Humano-Computador,1,6,M45
+CCO,7,COM213,Interação Humano-Computador,3,6,T345
+CCO,7,COM222,Desenvolvimento de Sistemas na Web,1,15,M123
+CCO,7,COM222,Desenvolvimento de Sistemas na Web,3,15,M123
+CCO,7,COM242,Sistemas Distribuídos,2,16,M123
+CCO,7,COM242,Sistemas Distribuídos,2,16,M45
+SIN,1,XDES01,Fundamentos de Programação,4,15,N12
+SIN,1,XDES01,Fundamentos de Programação,3,15,N12
+SIN,1,SAHC04,Projeto Integrado,2,6,N12
+SIN,1,SAHC05,Fundamentos de Sistemas de Informação,1,10,N12
+SIN,1,SAHC05,Fundamentos de Sistemas de Informação,4,10,N345
+SIN,3,XDES03,Programação Web,2,15,N12
+SIN,3,XDES03,Programação Web,1,15,N12
+SIN,3,SDES05,Engenharia de Software II,4,8,N12
+SIN,3,SDES05,Engenharia de Software II,3,8,N12
+SIN,3,STCO02,Algoritmos e Programação II,4,14,N345
+SIN,3,STCO02,Algoritmos e Programação II,1,14,N345
+SIN,3,SRSC03,Organização e Arquitetura de Computadores,5,11,N345
+SIN,3,SRSC03,Organização e Arquitetura de Computadores,5,11,N12
+SIN,3,MAT017,Fundamentos de Lógica e Matemática Discreta,4,5,N12
+SIN,3,MAT017,Fundamentos de Lógica e Matemática Discreta,3,5,N12
+SIN,3,COM220,Computação Orientada a Objetos I,2,9,N12
+SIN,3,COM220,Computação Orientada a Objetos I,1,9,N12
+SIN,5,SIN260,Sistemas Inteligentes,4,7,N12
+SIN,5,SIN260,Sistemas Inteligentes,3,7,N12
+SIN,5,COM240,Redes de Computadores,2,4,N12
+SIN,5,COM240,Redes de Computadores,1,4,N12
+SIN,5,SIN132,Linguagens Formais e Autômatos,2,5,N12
+SIN,5,SIN132,Linguagens Formais e Autômatos,1,5,N12
+SIN,5,COM231,Banco de Dados II,4,18,N12
+SIN,5,COM231,Banco de Dados II,3,18,N12
+SIN,7,SIN210,Governança de TI,2,8,N12
+SIN,7,SIN210,Governança de TI,1,8,N12
+SIN,7,COM213,Interação Humano-Computador,4,6,N12
+SIN,7,COM213,Interação Humano-Computador,3,6,N12
+SIN,7,SIN412,Desenvolvimento de Aplicações em SI,1,10,N345
+SIN,7,SIN412,Desenvolvimento de Aplicações em SI,5,10,N345
+SIN,7,SIN413,Inteligência de Negócios,4,8,N345
+SIN,7,SIN413,Inteligência de Negócios,5,8,N12
+SIN,7,SIN414,Auditoria e Segurança de Sistemas de Informação,2,4,N345
+SIN,7,SIN313,Organização e Métodos,3,2,N345
+Outros Cursos,1,CCO016,Fundamentos de Programação (EMT),2,3,T345
+Outros Cursos,1,CCO016,Fundamentos de Programação (EMT),2,3,T12
+Outros Cursos,1,CCO016,Fundamentos de Programação (EME),1,3,M45
+Outros Cursos,1,CCO016,Fundamentos de Programação (EME),3,3,T345
+Outros Cursos,1,CCO016,Fundamentos de Programação (EBP / ECI),3,3,T12
+Outros Cursos,1,CCO016,Fundamentos de Programação (EBP / ECI),1,3,T12
+Outros Cursos,1,CCO016,Fundamentos de Programação (MBA),1,11,M123
+Outros Cursos,1,CCO016,Fundamentos de Programação (MBA),3,11,M123
+Outros Cursos,1,CCO016,Fundamentos de Programação (EMA / EEN),2,3,M123
+Outros Cursos,1,CCO016,Fundamentos de Programação (EMA / EEN),2,3,M45
+Optativas,3,OPT1,Metaheurísticas para Problemas de Otimização,2,"2, 17",T345
+Optativas,3,OPT1,Metaheurísticas para Problemas de Otimização,2,"2, 17",T12
+Optativas,3,OPT2,Redes Complexas,1,"17, 18",M45
+Optativas,3,OPT2,Redes Complexas,3,"17, 18",T345
+Optativas,5,OPT3,Cloud Computing,2,"1, 11",T345
+Optativas,5,OPT3,Cloud Computing,2,"1, 11",T12
+Optativas,3,OPT4,Tópicos em Ciência de Dados,3,7,T12
+Optativas,3,OPT4,Tópicos em Ciência de Dados,1,7,T12
+Pós Graduação,3,POS1,Design Patterns,2,14,T12
+Pós Graduação,3,POS1,Design Patterns,1,14,M45
+Pós Graduação,4,POS2,Visualização da Informação,2,13,T345
+Pós Graduação,4,POS2,Visualização da Informação,2,13,T12
+Pós Graduação,5,POS3,Visão Computacional,1,12,M45
+Pós Graduação,5,POS3,Visão Computacional,3,12,T345
+Pós Graduação,5,POS5,Robótica,2,6,T345
+Pós Graduação,5,POS5,Robótica,2,6,T12

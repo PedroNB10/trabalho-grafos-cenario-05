@@ -1,0 +1,14 @@
+Curso,Período,Código da Disciplina,Nome da Disciplina,Dia da Semana,Professor,Horário
+CCO,2,XDES01,Fundamentos de Programação,2,12,M123
+CCO,2,XDES01,Fundamentos de Programação,2,12,T12
+CCO,2,CDES05,Programação Lógica e Funcional,3,7,M123
+CCO,2,CDES05,Programação Lógica e Funcional,1,7,T12
+CCO,2,CRSC04,Arquitetura de Computadores II,1,13,M123
+CCO,2,CRSC04,Arquitetura de Computadores II,2,13,M45
+CCO,2,CTCO01,Algoritmos e Estruturas de Dados I,3,"6, 15",T12
+CCO,2,CTCO01,Algoritmos e Estruturas de Dados I,1,"6, 15",M45
+CCO,2,CMAC04,Modelagem Computacional,1,5,T345
+CCO,2,CMAC04,Modelagem Computacional,3,5,T345
+CCO,2,CIC120,Organização e Arquitetura de Computadores I,2,13,M123
+CCO,2,CIC120,Organização e Arquitetura de Computadores I,2,13,T12
+CCO,2,CIC310,Economia da Informação,3,2,M123
