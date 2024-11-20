@@ -25,10 +25,10 @@ tarefa, o objetivo é o desenvolvimento de uma solução para criação de uma g
 
 ## Participantes do Projeto
 
-- Luara
-- Matheus
-- Pedro De Paula
-- Pedro Nogueira
+- Luara do Val Perielli
+- Matheus Luz de Faria
+- Pedro De Paula Goncalves
+- Pedro Nogueira Barboza
 
 ## Estrutura de pastas e arquivos do projeto
 
@@ -40,6 +40,9 @@ tarefa, o objetivo é o desenvolvimento de uma solução para criação de uma g
     │   └── diretrizesProjeto.pdf  # Contém enunciado do problema
     ├── src
     │   ├── classes # Contém a classe Disciplina que é um nó utilizado para a construção do grafo
+    │   ├── aluno # Contém saída do programa com alocação das disciplinas por turma
+    │   ├── professor # Contém saída do programa com alocação das disciplinas por professor
+    │   ├── controle # Contém saída do programa com alocação das disciplinas por turma e professor
     │   ├── utils 
     │   │   └── conversorCsvParaPdf.py # Converte arquivos CSV para PDF e coloca na pasta datasets/tabelas-convertidas
     │   └── main.py 
@@ -52,17 +55,71 @@ tarefa, o objetivo é o desenvolvimento de uma solução para criação de uma g
 - **csv**:  ler e gravar arquivos no formato CSV
 - **os**: manipulação de caminhos de arquivos e diretórios
 - **random**:  é usada para gerar números ou sequências aleatórias. No código, ela é empregada na função fazerDivisaoHorario
+- **logging:** Registra erros e eventos do sistema, facilitando a depuração e monitoramento do processo de agendamento.
+- **networkx:** Criação e manipulação de grafos para modelar as relações entre disciplinas e professores.
+- **matplotlib.pyplot:** Visualização de grafos gerados com NetworkX.
+- **collections.defaultdict:** Estrutura de dados para armazenar dicionários com valores padrão, útil para organizar horários e restrições.
+- **typing:** Tipagem estática para melhor legibilidade e manutenção do código.
+- **openpyxl:** Manipulação de arquivos Excel para exportação dos horários.
+- **openpyxl.styles:** Estilização de células em planilhas Excel, permitindo formatação personalizada dos horários.
+- **classes.Disciplina:** Classe personalizada que representa uma disciplina acadêmica com atributos como nome, código, carga horária, professores, etc.
 
 
+## Funções do Arquivo Principal `main.py`
 
-## Funções do arquivo principal main.py
+### Funções de Verificação de Restrições
 
-- **logicalXOR:** Verifica se apenas uma das condições fornecidas é verdadeira.
-- **carregarDisciplinasCsv:** Lê um arquivo CSV e retorna uma lista de objetos Disciplina.
-- **criarListaAdjacencia:** Gera um grafo representado por uma lista de adjacência conectando disciplinas relacionadas.
-- **colorirGrafo:** Atribui cores às disciplinas para evitar conflitos em um grafo.
-- **criarGrafoTurmas:** Cria um grafo que conecta disciplinas pertencentes à mesma turma.
-- **fazerDivisaoHorario:** Aloca disciplinas em horários específicos com base em suas cores no grafo.
+- **verificar_restricoes_professor**: Garante que nenhum professor tenha múltiplas disciplinas no mesmo horário.
+- **verificar_restricoes_turma**: Assegura que nenhuma turma tenha múltiplas disciplinas no mesmo horário.
+- **verificar_restricoes_curso**: Verifica restrições de horários específicas para cursos como SIN e CCO.
+
+### Funções de Criação e Salvamento de Grafos
+
+- **criar_grafo_disciplina_curso**: Cria um grafo relacionando disciplinas e professores.
+- **criar_grafo_coloracao_restricoes**: Cria um grafo representando as restrições de agendamento entre disciplinas.
+- **salvar_grafo_como_imagem**: Salva a visualização do grafo como uma imagem PNG.
+
+### Funções de Exportação de Horários
+
+- **exportar_horarios**: Exporta os horários gerados para arquivos CSV organizados por professores, alunos e um horário global.
+
+### Funções de Carregamento e Criação de Lista de Adjacência
+
+- **carregarDisciplinasCsv**: Carrega disciplinas de um arquivo CSV e retorna uma lista de objetos `Disciplina`.
+- **criarListaAdjacencia**: Gera uma lista de adjacência conectando disciplinas relacionadas.
+
+### Funções de Coloração de Grafo
+
+- **colorirGrafoDSatur**: Aplica o algoritmo DSatur para colorir o grafo de disciplinas.
+- **colorirGrafo**: Aplica um método básico de coloração para evitar conflitos no grafo.
+
+### Funções de Criação de Grafos para Turmas e Divisão de Horários
+
+- **criarGrafoTurmas**: Cria um grafo conectando disciplinas da mesma turma.
+- **fazerDivisaoHorario**: Aloca disciplinas em horários específicos com base em suas cores no grafo.
+
+### Funções Auxiliares
+
+- **logicalXOR**: Retorna `True` se apenas uma das duas condições fornecidas for verdadeira.
+- **exibirHorariosPorTurma**: Exibe os horários organizados por turma no console.
+
+### Funções de Geração de Planilhas
+
+- **gerar_planilha_horarios**: Gera planilhas Excel de horários para professores ou alunos a partir de arquivos CSV.
+
+## Classes Implementadas
+
+- **Disciplina**: Classe que representa um nó do grafo
+  - **self.indice**: Índice da disciplina **(int)**
+  - **self.codigo**: Código da disciplina **(str)**
+  - **self.nome**: Nome da disciplina **(str)**
+  - **self.curso**: Curso da disciplina **(str)**
+  - **self.ppc**: PPC da disciplina **(str)**
+  - **self.periodo**: Período da disciplina **(str)**
+  - **self.ch**: Carga horária da disciplina **(int)**
+  - **self.professores**: Lista de professores que ministram a disciplina **List[int]** (armazena o número do professor correspondente. Ex: Professor 1, Professor 2, Professor 3 => `[1, 2, 3]`)
+  - **self.turma**: Curso + PPC + '.' + período **(str)**
+  - **self.cor**: Cor da disciplina **(int)**
 
 
 ## Classes Implementadas
@@ -94,4 +151,6 @@ $ python main.py
 ```
 O projeto foi testado tanto em ambientes Windows quanto Linux, utilizando Python 3.12.3. Verifique se a sua versão do Python é compatível com o projeto.
 
-## Saída Esperada (to do)
+## Saída Esperada 
+
+- Ao rodar o código você terá o resultado da alocação das disciplinas em horários específicos, evitando conflitos de horários entre professores e turmas. Na pasta aluno você terá arquivos csv e xlsx com alocação de disciplinas por turma. Na pasta professor haverá arquivos csv e xlsx com alocação de disciplinas por professor. Na pasta controle haverá os horários de todas as turmas em um único arquivo csv e xlsx.
