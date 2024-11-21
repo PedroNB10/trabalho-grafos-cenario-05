@@ -43,6 +43,8 @@ tarefa, o objetivo é o desenvolvimento de uma solução para criação de uma g
     │   ├── aluno # Contém saída do programa com alocação das disciplinas por turma
     │   ├── professor # Contém saída do programa com alocação das disciplinas por professor
     │   ├── controle # Contém saída do programa com alocação das disciplinas por turma e professor
+    │   ├── grafo_disciplina_curso.png # Imagem do grafo de disciplinas e professores
+    │   ├── grafo_restricoes.png # Imagem do grafo de coloração de disciplinas
     │   ├── utils 
     │   │   └── conversorCsvParaPdf.py # Converte arquivos CSV para PDF e coloca na pasta datasets/tabelas-convertidas
     │   └── main.py 
