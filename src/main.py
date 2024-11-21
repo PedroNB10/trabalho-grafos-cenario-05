@@ -79,17 +79,15 @@ def salvar_grafo_como_imagem(grafo: nx.Graph):
     
     # Use different layout algorithms based on graph size
     if len(grafo) > 50:
-        pos = nx.spring_layout(grafo, k=1.5, iterations=50)
+        pos = nx.spring_layout(grafo, k=0.8, iterations=50)
     else:
         pos = nx.kamada_kawai_layout(grafo)
     
     # Draw nodes by type with different colors
     node_colors = [grafo.nodes[node].get('color', 'gray') for node in grafo.nodes()]
     node_sizes = [
-        3000 if grafo.nodes[node]['type'] == 'curso'
-        else 2000 if grafo.nodes[node]['type'] == 'periodo'
-        else 1500 if grafo.nodes[node]['type'] == 'disciplina'
-        else 1000  # for professors
+        3000 if grafo.nodes[node]['type'] == 'disciplina'
+        else 1500  # for professors
         for node in grafo.nodes()
     ]
     
@@ -125,7 +123,7 @@ def salvar_grafo_como_imagem(grafo: nx.Graph):
         font_weight='bold'
     )
     
-    plt.title("Grafo de Relações entre Disciplinas, Cursos e Professores", 
+    plt.title("Grafo de Relações entre Disciplinas e Professores", 
               fontsize=16, pad=20)
     plt.axis('off')
     plt.tight_layout()
@@ -224,25 +222,6 @@ def criar_grafo_disciplina_curso(nos: List[Disciplina]) -> nx.Graph:
             professors=disciplina.professores
         )
         
-        # Add course node if not exists
-        if disciplina.curso not in cursos:
-            G.add_node(
-                f"Curso: {disciplina.curso}",
-                type='curso',
-                color='lightgreen'
-            )
-            cursos.add(disciplina.curso)
-            
-        # Add period node if not exists
-        periodo_key = f"{disciplina.curso}-{disciplina.periodo}"
-        if periodo_key not in periodos:
-            G.add_node(
-                f"Período: {periodo_key}",
-                type='periodo',
-                color='lightyellow'
-            )
-            periodos.add(periodo_key)
-        
         # Add professor nodes and connect to discipline
         for prof in disciplina.professores:
             prof_node = f"Prof: {prof}"
@@ -252,6 +231,7 @@ def criar_grafo_disciplina_curso(nos: List[Disciplina]) -> nx.Graph:
                     type='professor',
                     color='lightpink'
                 )
+
             # Connect professor to discipline
             G.add_edge(
                 disciplina.nome,
@@ -259,30 +239,6 @@ def criar_grafo_disciplina_curso(nos: List[Disciplina]) -> nx.Graph:
                 weight=1,
                 relationship='teaches'
             )
-        
-        # Connect discipline to course
-        G.add_edge(
-            disciplina.nome,
-            f"Curso: {disciplina.curso}",
-            weight=2,
-            relationship='belongs_to'
-        )
-        
-        # Connect discipline to period
-        G.add_edge(
-            disciplina.nome,
-            f"Período: {disciplina.curso}-{disciplina.periodo}",
-            weight=2,
-            relationship='scheduled_in'
-        )
-        
-        # Connect period to course
-        G.add_edge(
-            f"Período: {disciplina.curso}-{disciplina.periodo}",
-            f"Curso: {disciplina.curso}",
-            weight=3,
-            relationship='part_of'
-        )
     
     return G
 
