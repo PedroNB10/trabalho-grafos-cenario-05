@@ -69,34 +69,255 @@ def verificar_restricoes_curso(horarios: List[Dict], nos: List[Disciplina]) -> b
     return True
 
 def salvar_grafo_como_imagem(grafo: nx.Graph):
-    plt.figure(figsize=(10, 8))
-    pos = nx.spring_layout(grafo)  # positions for all nodes
-    nx.draw(grafo, pos, with_labels=True, node_size=2000, node_color="skyblue", font_size=10)
-    plt.title("Grafo de Disciplinas e Professores")
-    plt.savefig("grafo_disciplina_curso.png")  # Save the graph as an image file
+    """
+    Saves the graph visualization with enhanced layout and styling.
+    
+    Args:
+        grafo (nx.Graph): NetworkX graph to visualize
+    """
+    plt.figure(figsize=(15, 12))
+    
+    # Use different layout algorithms based on graph size
+    if len(grafo) > 50:
+        pos = nx.spring_layout(grafo, k=1.5, iterations=50)
+    else:
+        pos = nx.kamada_kawai_layout(grafo)
+    
+    # Draw nodes by type with different colors
+    node_colors = [grafo.nodes[node].get('color', 'gray') for node in grafo.nodes()]
+    node_sizes = [
+        3000 if grafo.nodes[node]['type'] == 'curso'
+        else 2000 if grafo.nodes[node]['type'] == 'periodo'
+        else 1500 if grafo.nodes[node]['type'] == 'disciplina'
+        else 1000  # for professors
+        for node in grafo.nodes()
+    ]
+    
+    # Draw nodes
+    nx.draw_networkx_nodes(
+        grafo, pos,
+        node_color=node_colors,
+        node_size=node_sizes,
+        alpha=0.7
+    )
+    
+    # Draw edges with varying weights
+    edge_weights = [grafo[u][v].get('weight', 1) for u, v in grafo.edges()]
+    nx.draw_networkx_edges(
+        grafo, pos,
+        width=edge_weights,
+        alpha=0.4,
+        edge_color='gray'
+    )
+    
+    # Add labels with custom formatting
+    labels = {}
+    for node in grafo.nodes():
+        if grafo.nodes[node]['type'] == 'disciplina':
+            labels[node] = f"{node}\n({grafo.nodes[node]['codigo']})"
+        else:
+            labels[node] = node
+            
+    nx.draw_networkx_labels(
+        grafo, pos,
+        labels,
+        font_size=8,
+        font_weight='bold'
+    )
+    
+    plt.title("Grafo de Relações entre Disciplinas, Cursos e Professores", 
+              fontsize=16, pad=20)
+    plt.axis('off')
+    plt.tight_layout()
+    
+    # Save with high resolution
+    plt.savefig("grafo_disciplina_curso.png", dpi=300, bbox_inches='tight')
+    plt.close()
+
+def salvar_grafo_restricoes_como_imagem(grafo: nx.Graph, caminho: str = "grafo_restricoes.png"):
+    """
+    Salva o grafo de restrições como uma imagem com cores e layout otimizado.
+    
+    Args:
+        grafo: NetworkX Graph contendo o grafo de restrições
+        caminho: Caminho onde a imagem será salva
+    """
+    plt.figure(figsize=(15, 12))
+    
+    # Usa um layout que minimiza o cruzamento de arestas
+    pos = nx.spring_layout(grafo, k=2, iterations=50)
+    
+    # Extrai as cores dos nós para visualização
+    cores = [grafo.nodes[node]['cor'] for node in grafo.nodes()]
+    
+    # Desenha os nós
+    nx.draw_networkx_nodes(
+        grafo,
+        pos,
+        node_color=cores,
+        node_size=2000,
+        cmap=plt.cm.tab20,
+        alpha=0.7
+    )
+    
+    # Desenha as arestas
+    nx.draw_networkx_edges(
+        grafo,
+        pos,
+        edge_color='gray',
+        alpha=0.2
+    )
+    
+    # Adiciona os labels dos nós
+    labels = {node: f"{node}\n({grafo.nodes[node]['curso']}-{grafo.nodes[node]['periodo']})"
+             for node in grafo.nodes()}
+    nx.draw_networkx_labels(
+        grafo,
+        pos,
+        labels,
+        font_size=8,
+        font_weight='bold'
+    )
+    
+    plt.title("Grafo de Restrições de Agendamento", fontsize=16, pad=20)
+    plt.axis('off')
+    plt.tight_layout()
+    
+    # Salva a imagem
+    plt.savefig(caminho, dpi=300, bbox_inches='tight')
     plt.close()
 
 def criar_grafo_disciplina_curso(nos: List[Disciplina]) -> nx.Graph:
+    """
+    Creates a comprehensive graph representing relationships between disciplines, courses, and professors.
+    
+    Args:
+        nos (List[Disciplina]): List of Disciplina objects containing course information
+        
+    Returns:
+        nx.Graph: A NetworkX graph with disciplines, courses, periods, and professors as nodes
+        
+    Features:
+        - Separates nodes by type (discipline, course, professor, period)
+        - Adds relevant attributes to nodes (credits, course code, etc.)
+        - Creates meaningful connections between related entities
+        - Uses different node colors for different entity types
+        - Includes edge weights based on relationships
+    """
     G = nx.Graph()
     
-    # Adicionar nós e arestas com base em relações disciplinares
+    # Track unique entities
+    cursos = set()
+    periodos = set()
+    
+    # Add nodes with attributes
     for disciplina in nos:
-        G.add_node(disciplina.nome, type='disciplina', curso=disciplina.curso)
+        # Add discipline node with full attributes
+        G.add_node(
+            disciplina.nome,
+            type='disciplina',
+            curso=disciplina.curso,
+            periodo=disciplina.periodo,
+            codigo=disciplina.codigo,
+            ch=disciplina.ch,
+            color='lightblue',
+            professors=disciplina.professores
+        )
+        
+        # Add course node if not exists
+        if disciplina.curso not in cursos:
+            G.add_node(
+                f"Curso: {disciplina.curso}",
+                type='curso',
+                color='lightgreen'
+            )
+            cursos.add(disciplina.curso)
+            
+        # Add period node if not exists
+        periodo_key = f"{disciplina.curso}-{disciplina.periodo}"
+        if periodo_key not in periodos:
+            G.add_node(
+                f"Período: {periodo_key}",
+                type='periodo',
+                color='lightyellow'
+            )
+            periodos.add(periodo_key)
+        
+        # Add professor nodes and connect to discipline
         for prof in disciplina.professores:
-            G.add_node(f"Prof {prof}", type='professor')
-            G.add_edge(disciplina.nome, f"Prof {prof}")
+            prof_node = f"Prof: {prof}"
+            if not G.has_node(prof_node):
+                G.add_node(
+                    prof_node,
+                    type='professor',
+                    color='lightpink'
+                )
+            # Connect professor to discipline
+            G.add_edge(
+                disciplina.nome,
+                prof_node,
+                weight=1,
+                relationship='teaches'
+            )
+        
+        # Connect discipline to course
+        G.add_edge(
+            disciplina.nome,
+            f"Curso: {disciplina.curso}",
+            weight=2,
+            relationship='belongs_to'
+        )
+        
+        # Connect discipline to period
+        G.add_edge(
+            disciplina.nome,
+            f"Período: {disciplina.curso}-{disciplina.periodo}",
+            weight=2,
+            relationship='scheduled_in'
+        )
+        
+        # Connect period to course
+        G.add_edge(
+            f"Período: {disciplina.curso}-{disciplina.periodo}",
+            f"Curso: {disciplina.curso}",
+            weight=3,
+            relationship='part_of'
+        )
     
     return G
 
 def criar_grafo_coloracao_restricoes(nos: List[Disciplina], arestas: Dict) -> nx.Graph:
+    """
+    Cria um grafo NetworkX que representa as restrições de coloração entre disciplinas.
+    
+    Args:
+        nos: Lista de objetos Disciplina
+        arestas: Dicionário de adjacência representando as restrições
+    
+    Returns:
+        NetworkX Graph com as disciplinas e suas restrições
+    """
     G = nx.Graph()
     
-    # Adicionar nós e arestas com base em restrições de agendamento
+    # Adiciona nós com atributos
+    for disciplina in nos:
+        G.add_node(
+            disciplina.nome,
+            cor=disciplina.cor,
+            curso=disciplina.curso,
+            periodo=disciplina.periodo,
+            professores=','.join(map(str, disciplina.professores))
+        )
+    
+    # Adiciona arestas baseadas nas restrições
     for i, disciplina_i in enumerate(nos):
-        G.add_node(disciplina_i.nome, cor=disciplina_i.cor)
         for j in arestas[i]:
             disciplina_j = nos[j]
-            G.add_edge(disciplina_i.nome, disciplina_j.nome)
+            G.add_edge(
+                disciplina_i.nome,
+                disciplina_j.nome,
+                tipo='restricao'
+            )
     
     return G
 
@@ -191,21 +412,24 @@ def processo_agendamento_principal():
     tentativas_maximas = 250
 
     for tentativa in range(tentativas_maximas):
-        cores = colorirGrafo(nos, arestas)
+        cores = colorirGrafoDSatur(nos, arestas)
         horarios = fazerDivisaoHorario(nos, arestas)
 
         if horarios is None:
             logging.error(f"Falha no agendamento na tentativa {tentativa}")
             continue
 
-        # Realizar verificações de restrições
         if (verificar_restricoes_professor(horarios, nos) and
                 verificar_restricoes_turma(horarios, nos) and
                 verificar_restricoes_curso(horarios, nos)):
             
-            # Criar grafos NetworkX e salvar como imagem
+            # Criar e salvar o grafo de disciplinas e professores
             grafo_disciplina_curso = criar_grafo_disciplina_curso(nos)
             salvar_grafo_como_imagem(grafo_disciplina_curso)
+            
+            # Criar e salvar o grafo de restrições
+            grafo_restricoes = criar_grafo_coloracao_restricoes(nos, arestas)
+            salvar_grafo_restricoes_como_imagem(grafo_restricoes)
 
             # Exportar horários
             exportar_horarios(horarios, nos)
